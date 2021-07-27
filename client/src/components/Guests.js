@@ -6,9 +6,13 @@ import IconButton from "@material-ui/core/IconButton";
 import RemoveIcon from "@material-ui/icons/Remove"
 import AddIcon from "@material-ui/icons/Add"
 import Icon from "@material-ui/core/Icon";
+import emailjs from "emailjs-com"
 
 import {makeStyles} from "@material-ui/core/styles"
 
+const service = process.env.REACT_APP_SERVICE_ID
+const template = process.env.REACT_APP_TEMPLATE_ID
+const user = process.env.REACT_APP_USER_ID
 
 
 
@@ -56,6 +60,28 @@ values.splice(index, 1)
 setInputField(values)
 }
 
+function sendEmail(index) {
+    // function to send email to each guest based on their index in the table
+    const values = [...inputFields]
+    const email = values[index].email
+    const first_name = values[index].firstName
+    const last_name = values[index].lastName
+
+    const params = {
+        first_name: first_name,
+        email:email,
+        last_name: last_name
+    }
+   
+
+    emailjs.send(service,template,params,user)
+        .then((res) => {
+            console.log(res)
+            alert("email sent thank you")
+        })
+        .catch((err) => console.log(err))
+}
+
 
     return (
         <Container>
@@ -96,6 +122,7 @@ setInputField(values)
                     <Button className={classes.button}
                     vareient="contained" 
                     color="secondary"
+                    onClick={(event)=> sendEmail(index)}
                     >Send email</Button>
 
                    <IconButton

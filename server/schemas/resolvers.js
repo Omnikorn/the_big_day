@@ -1,15 +1,23 @@
-const { Users, User } = require('../models');
+const { Users  } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        me: async (parent,args,context) => {
+        me: async (parent, args,context) => {
             if (context.user) {
                 const userData = await User.findOne({_id: context.user._id}).select
                 ('-_v-password');
                 return userData;
             }
             throw new AuthenticationError('You are not logged in');
+        },
+        wedding: async(parent, args, context) => {
+            if (context.wedding) {
+                const weddingData = await wedding.findOne({
+                    _id:context.wedding._id
+                })
+                return weddingData;
+            }
         },
     },
 
@@ -34,6 +42,7 @@ const resolvers = {
             return { token, user };
         },
     }
+
 };
 
 module.exports = resolvers;

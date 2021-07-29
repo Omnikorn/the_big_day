@@ -18,7 +18,7 @@ const server = new ApolloServer ({
 // const routes = require('./');
 
 
-// TODO we need apollo server here and it needs to wrap our express app 
+
 
 
 

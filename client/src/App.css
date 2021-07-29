@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+
+@font-face {
+  font-family: 'balladaregular';
+  src: url('./font/ballada-webfont.woff2') format('woff2'),
+       url('./font/ballada-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}

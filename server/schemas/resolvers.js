@@ -1,6 +1,9 @@
 const { Users  } = require('../models');
 const { signToken } = require('../utils/auth');
 
+
+// TODO authentication error requires apollo-server-express
+
 const resolvers = {
     Query: {
         me: async (parent, args,context) => {
@@ -11,6 +14,8 @@ const resolvers = {
             }
             throw new AuthenticationError('You are not logged in');
         },
+
+        // TODO what is this query for ? finding a wedding by id? 
         wedding: async(parent, args, context) => {
             if (context.wedding) {
                 const weddingData = await wedding.findOne({
@@ -20,6 +25,11 @@ const resolvers = {
             }
         },
     },
+
+    // TODO we need a query to find all guest related to a single wedding 
+    // TODO do we need seperate queries/mutations for entering venues and dates etc ?  
+    // TODO where are we setting the context for wedding ? do we need all the wedding as contex or just the id 
+
 
     Mutation: {
         addUser: async (parent,args) => {

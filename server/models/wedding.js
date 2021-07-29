@@ -1,6 +1,10 @@
 const { Schema, model } = require("mongoose");
 
-const userSchema = new Schema({
+
+// TODO should this be called weddingSchem ? 
+// TODO need to create a guest schem and import it into wedding and import weddings into user 
+
+const weddingSchema = new Schema({
   bride_first_name: {
     type: String,
     required: true,
@@ -42,5 +46,5 @@ const userSchema = new Schema({
   },
 });
 
-const wedding = model('wedding', userSchema);
+const wedding = model('wedding', weddingSchema);
 module.exports = wedding;

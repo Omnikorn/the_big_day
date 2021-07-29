@@ -18,6 +18,16 @@ const userSchema = new Schema({
         required: true,
         minlength: 5,
     },
+
+    wedding:{
+type:Schema.Types.ObjectId,
+ref:"Wedding"
+    },
+
+    guests:[{
+        type:Schema.Types.ObjectId,
+        ref:"Guests"
+    }]
     
 });
 

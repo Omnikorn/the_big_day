@@ -1,8 +1,8 @@
 const { Schema, model } = require("mongoose");
 
 
-// TODO should this be called weddingSchem ? 
-// TODO need to create a guest schem and import it into wedding and import weddings into user 
+ 
+
 
 const weddingSchema = new Schema({
   bride_first_name: {
@@ -27,8 +27,8 @@ const weddingSchema = new Schema({
     unique: true,
   },
   date: {
-    type: DataTypes.Date,
-    allowNull: false,
+    type: String,
+    
   },
   venue: {
     type: String,
@@ -42,8 +42,18 @@ const weddingSchema = new Schema({
   ],
   description: {
       type: String,
-      required: true,
+      required: false,
   },
+  wedding_owner:{
+    type:String,
+    required:true,
+    trim:true
+  },
+
+  guests:[{
+    type: Schema.Types.ObjectId,
+    ref:"Guests"
+  }]
 });
 
 const wedding = model('wedding', weddingSchema);

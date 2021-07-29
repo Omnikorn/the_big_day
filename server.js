@@ -1,5 +1,5 @@
 const express = require('express');
-const connectDB = require('./config/db');
+const connectDB = require('./config/connection');
 var cors = require('cors');
 const path = require('path');
 const mongoose = require ('mongoose')

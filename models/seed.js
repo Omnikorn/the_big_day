@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const db = require('./guests')
+const db = require('../server/models/guests')
 
 mongoose.connect("mongodb+srv://team3:trilogy21@cluster0.ir5sl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true })
 
@@ -11,7 +11,7 @@ const GuestSeed = [{
     name: 'harith'
 },
 {
-    name: 'paolo'
+    name: 'toby'
 }]
 
 db.Guests.deleteMany({})

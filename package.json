@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "apollo-server-express": "^3.0.2",
     "config": "^3.3.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",

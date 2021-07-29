@@ -3,13 +3,33 @@ const connectDB = require('./config/db');
 var cors = require('cors');
 const path = require('path');
 const mongoose = require ('mongoose')
+const {ApolloServer} = require ("apollo-server-express")
+const {typeDefs, resolvers} = require ("./server/models");
+const { authMiddleware } = require('./server/utils/auth');
+
+const server = new ApolloServer ({
+    typeDefs,
+    resolvers,
+    context: authMiddleware
+})
+
+
 // routes
 // const routes = require('./');
+
+
+// TODO we need apollo server here and it needs to wrap our express app 
+
+
 
 const app = express();
 
 // Connect Database
 connectDB();
+
+// wrap app with apollo server
+server.applyMiddleware({app})
+
 
 // cors
 app.use(cors({ origin: true, credentials: true }));

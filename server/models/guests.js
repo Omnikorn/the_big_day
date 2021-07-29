@@ -9,3 +9,6 @@ const Guest = new Schema
 const Guests = mongoose.model('Guests', Guest)
 
 module.exports = { Guests };
+
+
+// TODO why do we have 2 model directories ? 

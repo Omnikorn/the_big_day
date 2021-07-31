@@ -16,14 +16,14 @@ const resolvers = {
         },
 
         // TODO what is this query for ? finding a wedding by id? 
-        wedding: async(parent, args, context) => {
-            if (context.wedding) {
-                const weddingData = await wedding.findOne({
-                    _id:context.wedding._id
-                })
-                return weddingData;
-            }
-        },
+        // wedding: async(parent, args, context) => {
+        //     if (context.wedding) {
+        //         const weddingData = await wedding.findOne({
+        //             _id:context.wedding._id
+        //         })
+        //         return weddingData;
+        //     }
+        // },
     },
 
     // TODO we need a query to find all guest related to a single wedding 

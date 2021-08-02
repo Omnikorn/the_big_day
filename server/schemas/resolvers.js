@@ -1,5 +1,5 @@
 const { Users  } = require('../models');
-const { signToken } = require('../utils/auth');
+// const { signToken } = require('../utils/auth');
 
 
 // TODO authentication error requires apollo-server-express
@@ -12,18 +12,14 @@ const resolvers = {
                 ('-_v-password');
                 return userData;
             }
-            throw new AuthenticationError('You are not logged in');
+            // throw new AuthenticationError('You are not logged in');
         },
 
-        // TODO what is this query for ? finding a wedding by id? 
-        // wedding: async(parent, args, context) => {
-        //     if (context.wedding) {
-        //         const weddingData = await wedding.findOne({
-        //             _id:context.wedding._id
-        //         })
-        //         return weddingData;
-        //     }
-        // },
+        Wedding: async (parent, args, context) => {
+            const weddingData = await db.Wedding.get(id)
+            const wedding = db.Wedding.list()
+            return weddingData
+        }
     },
 
     // TODO we need a query to find all guest related to a single wedding 

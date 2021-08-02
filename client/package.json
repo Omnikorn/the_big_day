@@ -2,7 +2,7 @@
   "name": "big-day-local",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8082",
+  "proxy": "http://localhost:3500/graphql",
   "dependencies": {
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",

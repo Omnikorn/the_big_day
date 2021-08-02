@@ -1,6 +1,6 @@
 const User = require('./User');
-const Wedding = require("./wedding")
-const Guests = require("./guests")
+const Wedding = require("./Wedding")
+const Guests = require("./Guests")
 
 
 module.exports = { User,Wedding,Guests };

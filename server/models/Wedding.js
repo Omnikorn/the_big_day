@@ -1,9 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-
- 
-
-
 const weddingSchema = new Schema({
   bride_first_name: {
     type: String,
@@ -56,5 +52,5 @@ const weddingSchema = new Schema({
   }]
 });
 
-const wedding = model('wedding', weddingSchema);
-module.exports = wedding;
+const Wedding = model('wedding', weddingSchema);
+module.exports = Wedding;

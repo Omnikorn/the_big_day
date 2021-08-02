@@ -1,4 +1,4 @@
-const { Users  } = require('../models');
+const { Users, Wedding  } = require('../models');
 // const { signToken } = require('../utils/auth');
 
 
@@ -15,11 +15,15 @@ const resolvers = {
             // throw new AuthenticationError('You are not logged in');
         },
 
-        Wedding: async (parent, args, context) => {
-            const weddingData = await db.Wedding.get(id)
-            const wedding = db.Wedding.list()
+        weddings: async (parent, args, context) => {
+            const weddingData = await Wedding.find({})
+            console.log("WeddingData :::",weddingData)
             return weddingData
-        }
+        },
+        wedding: async (parent, args, context) => {
+            // TODO : add logic here please since we have a 
+            return
+        } 
     },
 
     // TODO we need a query to find all guest related to a single wedding 

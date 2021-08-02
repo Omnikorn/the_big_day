@@ -4,7 +4,7 @@ const typeDefs = gql`
 type User {
     _id: ID!
     username: String!
-    email: String
+    email: String!
     wedding: Wedding
 }
 
@@ -25,7 +25,7 @@ type Wedding {
     date: String,
     venue: String,
     menu_choice:[String],
-    # wedding_owner:(_id,User)
+    wedding_owner:ID
 }
 
 
@@ -38,7 +38,7 @@ input WeddingData {
     date: String,
     venue: String,
     menu_choice:[String],
-    # wedding_owner:(_id,User)
+    wedding_owner:ID
 }
 
 
@@ -47,7 +47,7 @@ type Guest {
     email: String!
     rsvp: String,
     menu:String,
-    # wedding_owner:(_id,User)
+    wedding_owner:ID
 }
 
 input guestData {
@@ -55,7 +55,7 @@ input guestData {
     email: String!
     rsvp: String,
     menu:String,
-    # wedding_owner:(_id,User)
+    wedding_owner:ID
 }
 
 

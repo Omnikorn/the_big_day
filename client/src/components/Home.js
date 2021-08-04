@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,6 +9,10 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER
+ } from '../utils/mutations';
+ import Auth from "../utils/auth"
 
 
 
@@ -47,6 +51,48 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
+const [userFormData, setUserFormData] = useState({email: "", password:""})
+const [validated] = useState(false);
+const [showAlert, setShowAlert] = useState(false)
+const [login, {error}] = useMutation(LOGIN_USER)
+
+useEffect(()=>{
+  if(error){
+    setShowAlert(true)
+  } else {
+    setShowAlert(false)
+  }
+}, [error]);
+
+const handleInputChange = (event) =>{
+  const {name, value} = event.target;
+  setUserFormData({...userFormData, [name]: value})
+}
+
+const handleFormSubmit = async (event) => {
+event.preventDefault();
+
+const form = event.currentTarget;
+if (form.checkValidity()===false){
+  event.preventDefault();
+  event.stopPropagation();
+}
+try {
+  const {data} = await login ({
+    variable:{...userFormData}
+  });
+  console.log(data)
+  Auth.login(data.login.token)
+} catch(e){
+  console.error(e)
+}
+
+setUserFormData({
+  email: "",
+  password: "",
+})
+}
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -59,7 +105,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={handleFormSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -68,7 +114,8 @@ export default function SignIn() {
               id="email"
               label="Email Address"
               name="email"
-              autoComplete="email"
+              onChange={handleInputChange}
+            value={userFormData.email}
               autoFocus
             />
             <TextField
@@ -80,7 +127,8 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+              onChange={handleInputChange}
+            value={userFormData.password}
             />
            
             <Button
@@ -88,6 +136,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               color="primary"
+              
               className={classes.submit}
             >
               Sign In

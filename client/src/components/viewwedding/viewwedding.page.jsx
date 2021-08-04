@@ -19,7 +19,7 @@ function ViewWedding() {
 				{weddingData.map((wedding) => (
 					<div>
 						<p>{wedding.bride_first_name}</p>
-						<p>{wedding.brid_last_name}</p>
+						<p>{wedding.bride_last_name}</p>
 						<p>{wedding.groom_first_name}</p>
 						<p>{wedding.groom_last_name}</p>
 					</div>

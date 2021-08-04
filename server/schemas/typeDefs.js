@@ -71,8 +71,8 @@ type Mutation {
     addGuest(Guest:guestData):Guest
     login(email: String!, password: String!): Auth
     addUser(username: String! email: String!, password: String!): Auth
-    removeUSer(userId: ID!): User
-    # TODO should this return a user ? or Auth ? 
+    # removeUSer(userId: ID!): User
+    # TODO we can add remove user later not needed for minimum product ? 
 }
 `
 

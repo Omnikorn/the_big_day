@@ -12,3 +12,14 @@ export const WEDDING_QUERY = gql`
 		}
 	}
 `
+export const QUERY_ME = gql`
+{
+	me{
+		_id
+		username
+		email
+		wedding
+	}
+}
+
+`

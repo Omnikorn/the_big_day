@@ -1,5 +1,6 @@
 const { Users, Wedding  } = require('../models');
-// const { signToken } = require('../utils/auth');
+const {AuthenticationError} = require ("apollo-server-express")
+const { signToken } = require('../utils/auth');
 
 
 // TODO authentication error requires apollo-server-express
@@ -8,11 +9,10 @@ const resolvers = {
     Query: {
         me: async (parent, args,context) => {
             if (context.user) {
-                const userData = await User.findOne({_id: context.user._id}).select
-                ('-_v-password');
+                const userData = await User.findOne({_id: context.user._id}).select('-_v-password');
                 return userData;
             }
-            // throw new AuthenticationError('You are not logged in');
+            throw new AuthenticationError('You are not logged in');
         },
 
         weddings: async (parent, args, context) => {
@@ -37,11 +37,12 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
+
         login: async (parent, { email, password}) => {
             const user = await User.findOne({ email });
 
             if (!user) {
-                throw new AuthenticationError('You have written incorecct credentials');
+                throw new AuthenticationError('Please enter correct details');
             }
             const correctPw = await user.isCorrectPassword(password);
             if (!correctPw) {

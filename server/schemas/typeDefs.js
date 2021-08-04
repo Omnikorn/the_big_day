@@ -60,7 +60,8 @@ input guestData {
 
 
 type Query {
-    me: User
+    # me: User
+    user: User
     wedding: Wedding
     weddings: [Wedding]
     guest: Guest

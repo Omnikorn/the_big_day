@@ -1,4 +1,4 @@
-const { Users, Wedding  } = require('../models');
+const { User, Wedding  } = require('../models');
 const {AuthenticationError} = require ("apollo-server-express")
 const { signToken } = require('../utils/auth');
 
@@ -7,13 +7,18 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        me: async (parent, args,context) => {
-            if (context.user) {
-                const userData = await User.findOne({_id: context.user._id}).select('-_v-password');
-                return userData;
-            }
-            throw new AuthenticationError('You are not logged in');
+        // me: async (parent, args,context) => {
+        //     if (context.user) {
+        //         const userData = await User.findOne({_id: context.user._id}).select('-_v-password');
+        //         return userData;
+        //     }
+        //     throw new AuthenticationError('You are not logged in');
+        // },
+
+        user: async (parent, {email})=> {
+            return User.findOne({email}).populate("wedding")
         },
+        
 
         weddings: async (parent, args, context) => {
             const weddingData = await Wedding.find({})

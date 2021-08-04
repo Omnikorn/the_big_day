@@ -67,10 +67,12 @@ useEffect(()=>{
 const handleInputChange = (event) =>{
   const {name, value} = event.target;
   setUserFormData({...userFormData, [name]: value})
+  console.log("data is", userFormData)
 }
 
 const handleFormSubmit = async (event) => {
 event.preventDefault();
+console.log("the form data is", userFormData)
 
 const form = event.currentTarget;
 if (form.checkValidity()===false){

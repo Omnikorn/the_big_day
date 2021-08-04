@@ -52,21 +52,21 @@ export default function SignIn() {
   const classes = useStyles();
 
 const [userFormData, setUserFormData] = useState({email: "", password:""})
-const [validated] = useState(false);
-const [showAlert, setShowAlert] = useState(false)
-const [login, {error}] = useMutation(LOGIN_USER)
+// const [validated] = useState(false);
+// const [showAlert, setShowAlert] = useState(false)
+const [login, {error , data}] = useMutation(LOGIN_USER)
 
-useEffect(()=>{
-  if(error){
-    setShowAlert(true)
-  } else {
-    setShowAlert(false)
-  }
-}, [error]);
+// useEffect(()=>{
+//   if(error){
+//     setShowAlert(true)
+//   } else {
+//     setShowAlert(false)
+//   }
+// }, [error]);
 
 const handleInputChange = (event) =>{
   const {name, value} = event.target;
-  setUserFormData({...userFormData, [name]: value})
+  setUserFormData({...userFormData, [name]: value,})
   console.log("data is", userFormData)
 }
 
@@ -74,16 +74,16 @@ const handleFormSubmit = async (event) => {
 event.preventDefault();
 console.log("the form data is", userFormData)
 
-const form = event.currentTarget;
-if (form.checkValidity()===false){
-  event.preventDefault();
-  event.stopPropagation();
-}
+// const form = event.currentTarget;
+// if (form.checkValidity()===false){
+//   event.preventDefault();
+//   event.stopPropagation();
+// }
 try {
   const {data} = await login ({
-    variable:{...userFormData}
+    variables:{...userFormData}
   });
-  console.log(data)
+  // console.log(data)
   Auth.login(data.login.token)
 } catch(e){
   console.error(e)

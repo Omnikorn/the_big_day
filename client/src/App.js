@@ -2,7 +2,7 @@ import React from "react"
 import {
 	BrowserRouter as Router,
 	Route,
-	Switch
+	
 } from "react-router-dom"
 import "./App.css"
 import CreateWedding from "./components/createwedding/createwedding.form"
@@ -19,7 +19,7 @@ import {
 } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 
-const httplink = createHttpLink({
+const httpLink = createHttpLink({
 	uri: "/graphql",
 	// credentials: "same-origin"
 })
@@ -37,8 +37,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const client = new ApolloClient({
-	// link: authLink.concat(httplink),
-	uri: "http://localhost:3001/graphql",
+	link: authLink.concat(httpLink),
 	cache: new InMemoryCache(),
 })
 

@@ -83,8 +83,10 @@ try {
   const {data} = await login ({
     variables:{...userFormData}
   });
-  // console.log(data)
+  console.log(data)
+  // take data set in context. 
   Auth.login(data.login.token)
+  
 } catch(e){
   console.error(e)
 }

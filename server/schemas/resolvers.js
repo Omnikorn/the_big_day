@@ -16,7 +16,7 @@ const resolvers = {
         // },
 
         user: async (parent, {email})=> {
-            return User.findOne({email}).populate("wedding")
+            return User.findOne({email}).populate("wedding","guests")
         },
         
 
@@ -55,6 +55,8 @@ const resolvers = {
             }
 
             const token = signToken(user);
+            console.log("token=", token)
+            console.log("user=", user)
             return { token, user };
         },
     }

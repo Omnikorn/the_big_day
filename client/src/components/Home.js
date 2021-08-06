@@ -13,6 +13,9 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER
  } from '../utils/mutations';
  import Auth from "../utils/auth"
+ import { usePartyContext } from '../utils/partycontext';
+
+ 
 
 
 
@@ -50,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
-
+  const {organiser, setOrganiser} = usePartyContext()
 const [userFormData, setUserFormData] = useState({email: "", password:""})
 // const [validated] = useState(false);
 // const [showAlert, setShowAlert] = useState(false)
@@ -84,7 +87,8 @@ try {
     variables:{...userFormData}
   });
   console.log(data)
-  // take data set in context. 
+   let setOrganiser= {data} 
+  console.log("the organiser state is " , organiser)
   Auth.login(data.login.token)
   
 } catch(e){

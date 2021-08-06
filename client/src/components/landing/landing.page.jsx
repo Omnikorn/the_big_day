@@ -1,56 +1,176 @@
 import React from "react"
-import HorizontalScroll from "react-scroll-horizontal"
-import "./horizontal.css"
+import { Parallax, Background } from "react-parallax"
+
+const styles = {
+	fontFamily: "sans-serif",
+	textAlign: "center",
+}
+
+const insideStyles = {
+	// background: "white",
+	padding: 20,
+	position: "absolute",
+	fontFamily: "ballada",
+	color: "palevioletred",
+	fontSize: "10rem",
+    width:"100vw",
+	top: "50%",
+	left: "50%",
+	transform: "translate(-50%,-50%)",
+}
+
+const paragraphStyle = {
+	padding: 10,
+	position: "absolute",
+	color: "white",
+	backgroundColor: "palevioletred",
+    borderRadius:"25px",
+	fontSize: "1.3rem",
+	top: "90%",
+	left: "50%",
+	transform: "translate(-50%,-70%)",
+}
 
 
-function Landing () {
+const image1 =
+	require("./newimages/helena-lopes-Vrb_vtQAxJU-unsplash.jpg").default
 
-    // const child= {width:"300em", height:"100%"}
+const image2 =
+	require("./newimages/coplerunning.png").default
+const image3 =
+	require("./newimages/hearts.png").default
+const image4 =
+	require("./newimages/cake2.png").default
 
-    return (
-        <div className="page">
-            <HorizontalScroll  reverseScroll={true}>
-                <div  className="main bg">
-                    <h1> The Big Day</h1>
-                </div>
+const image5 = require("./newimages/flowers.png").default
 
-                <div  className="main bg1">
-                    <div>
-                        <h1> We are here to help</h1>
-                        <div className="paragraph">
-                            <p>Planning a wedding can be a very magical but strssful time.</p>
-                            <p> Let us take the stress out of it for you and leave you to enjoy the magic</p>
+
+
+
+    const Landing = () => {
+        return (
+            <div>
+                <Parallax
+                    // blur={{min:-15, max:15}}
+                    bgImage={
+                        image5
+                    }
+                    strength={-200}
+                >
+                    <div style={{ height: "140vh" }} />
+                    <h1 style={insideStyles}>The Big Day</h1>
+                </Parallax>
+                {/* <h1>
+                    {" "}
+                    ------------------------------------------------
+                </h1> */}
+                <div style={styles}>
+                    <Parallax bgImage={image1} strength={500}>
+                        <div style={{ height: "100vh" }}>
+                            <div style={insideStyles}>
+                                We are here to help!
+                            </div>
+                            <div style={paragraphStyle}>
+                                <p>
+                                    Planning a wedding can be a very magical but
+                                    strssful time.
+                                </p>
+                                <p>
+                                    {" "}
+                                    Let us take the stress out of it for you and
+                                    leave you to enjoy the magic
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div  className="main bg2">
-                    <div>
-                        <h1> Send it in an Email</h1>
-                        <div className="paragraph">
-                                <p>Save time (and the planet) and send all your invites electronically from one place</p>
+                    </Parallax>
+                    {/* <h2>| | |</h2> */}
+                    <Parallax
+                        bgImage={image2}
+                        blur={{ min: -1, max: 3 }}
+                    >
+                        <div style={{ height:"120vh" }}>
+                            <div style={insideStyles}>
+                                Send it in an Email
+                            </div>
+                            <div style={paragraphStyle}>
+                            <p>Save time (and the planet) and send all your invites electronically from one place</p> 
+                            </div>
+                        </div>
+                    </Parallax>
+                    {/* <h2>| | |</h2> */}
+                    <Parallax bgImage={image3} strength={1000}>
+    
+                    <div style={{ height: 500 }}>
+                            <div style={insideStyles}>Track it all</div>
+                            <div style={paragraphStyle}>
+                            <p>For your peace of mind, track your guests' RSVPs and Menu choices from our app</p>
+                            </div>
+                        </div>
+                        
+                    </Parallax>
+                    {/* <h2>| | |</h2> */}
+                    <Parallax
+                        bgImage={image4}
+                        strength={200}
+                        renderLayer={(percentage) => (
+                            <div>
+                                
+                                    <div
+                                        style={{
+                                            position: "absolute",
+                                            background: `rgba(255, 125, 0, ${
+                                                percentage * 1
+                                            })`,
+                                            left: "50%",
+                                            top: "50%",
+                                            borderRadius: "50%",
+                                            transform: "translate(-50%,-50%)",
+                                            width: percentage * 500,
+                                            height: percentage * 500,
+                                        }}
+                                    />
                                 
                             </div>
-                    </div>
+                        )}
+                    >
+                        <div style={{ height: 1000 }}>
+                            <div style={insideStyles}>Sign up now</div>
+                        </div>
+                    </Parallax>
+                    {/* <h2>| | |</h2> */}
+                    {/* <Parallax strength={500}>
+                        <Background className="custom-bg">
+                            <div
+                                style={{
+                                    height: 2000,
+                                    width: 2000,
+                                    backgroundImage:
+                                        "url('https://i.imgur.com/8CV5WAB.png')",
+                                }}
+                            />
+                        </Background>
+                        <div>
+                            <br />
+                            custom background component
+                            <br />
+                            <br />
+                            custom background component
+                            <br />
+                            <br />
+                            custom background component
+                            <br />
+                            <br />
+                        </div>
+                    </Parallax> */}
+                    <div style={{ height: 500 }} />
+                    <h2>{"\u2728"}</h2>
                 </div>
+            </div>
+        )
+    }
 
-                <div  className="main bg3">
-                    <div>
-                        <h1> Track it All</h1>
-                        <div className="paragraph">
-                                    <p>For your peace of mind, track your guests' RSVPs and menue choices from our app</p>
-                                    
-                                </div>
-                    </div>
-                    </div>
 
-                <div  className="main bg4">
-                    
-                </div>
-            </HorizontalScroll>
 
-        </div>
-    )
-}
+
 
 export default Landing

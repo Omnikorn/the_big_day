@@ -46,12 +46,12 @@ function App() {
 		<ApolloProvider client={client}>
 			<Router>
 				<div className="App">
-					<Route exact path="/" component={Guests} />
+					<Route exact path="/" component={Landing} />
 					<Route exact path="/Home" component={Home} />
 					<Route
 						exact
-						path="/landing"
-						component={Landing}
+						path="/guests"
+						component={Guests}
 					/>
 					<Route
 						exact

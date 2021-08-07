@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
-  const {organiser, setOrganiser} = usePartyContext()
+  // const {organiser, setOrganiser} = usePartyContext()
 const [userFormData, setUserFormData] = useState({email: "", password:""})
 // const [validated] = useState(false);
 // const [showAlert, setShowAlert] = useState(false)
@@ -82,18 +82,18 @@ console.log("the form data is", userFormData)
 //   event.preventDefault();
 //   event.stopPropagation();
 // }
-try {
-  const {data} = await login ({
-    variables:{...userFormData}
-  });
-  console.log(data)
-   let setOrganiser= {data} 
-  console.log("the organiser state is " , organiser)
-  Auth.login(data.login.token)
+// try {
+//   const {data} = await login ({
+//     variables:{...userFormData}
+//   });
+//   console.log(data)
+//    let setOrganiser= {data} 
+//   console.log("the organiser state is " , organiser)
+//   Auth.login(data.login.token)
   
-} catch(e){
-  console.error(e)
-}
+// } catch(e){
+//   console.error(e)
+// }
 
 setUserFormData({
   email: "",

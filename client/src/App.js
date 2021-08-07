@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import {
 	BrowserRouter as Router,
 	Route,
@@ -8,7 +8,10 @@ import "./App.css"
 import CreateWedding from "./components/createwedding/createwedding.form"
 import Guests from "./components/Guests"
 import Home from "./components/Home"
-
+import Login from "./components/login"
+import Header from "./components/header"
+import { magic } from './lib/magic';
+import { UserContext } from './lib/UserContext';
 import Landing from "./components/landing/landing.page"
 import ViewWedding from "./components/viewwedding/viewwedding.page"
 import {
@@ -18,6 +21,7 @@ import {
 	InMemoryCache,
 } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
+
 
 const httpLink = createHttpLink({
 	uri: "/graphql",
@@ -41,13 +45,31 @@ const client = new ApolloClient({
 	cache: new InMemoryCache(),
 })
 
+
 function App() {
+	const [user, setUser] = useState();
+
+  // If isLoggedIn is true, set the UserContext with user data
+  // Otherwise, set it to {user: null}
+  useEffect(() => {
+    setUser({ loading: true });
+    magic.user.isLoggedIn().then((isLoggedIn) => {
+      return isLoggedIn
+        ? magic.user.getMetadata().then((userData) => setUser(userData))
+        : setUser({ user: null });
+    });
+  }, []);
 	return (
 		<ApolloProvider client={client}>
+			
 			<Router>
+			
+			<UserContext.Provider value={[user, setUser]}>
+			<Header />
 				<div className="App">
 					<Route exact path="/" component={Landing} />
 					<Route exact path="/Home" component={Home} />
+					<Route exact path="/login" component={Login} />
 					<Route
 						exact
 						path="/guests"
@@ -64,6 +86,7 @@ function App() {
 						component={ViewWedding}
 					/>
 				</div>
+				</UserContext.Provider>
 			</Router>
 		</ApolloProvider>
 	)

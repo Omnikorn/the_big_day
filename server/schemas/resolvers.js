@@ -32,11 +32,16 @@ const resolvers = {
             return
         },
 
-        users: async (parent, args ,context) => {
-            const allUsers = await User.find({})
-            console.log("All users are =" , allUsers)
-            return allUsers
+        // users: async (parent, args ,context) => {
+        //     const allUsers = await User.find({})
+        //     console.log("All users are =" , allUsers)
+        //     return allUsers
+        // }
+
+        users: async () => {
+            return User.find().populate('Guests')
         }
+
 
     },
 

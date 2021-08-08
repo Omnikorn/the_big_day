@@ -49,7 +49,8 @@ type Guest {
     email: String!
     rsvp: String,
     menu:String,
-    wedding_owner:ID
+    _id: ID
+    # wedding_owner:ID
 }
 
 input guestData {
@@ -57,7 +58,7 @@ input guestData {
     email: String!
     rsvp: String,
     menu:String,
-    wedding_owner:ID
+        # wedding_owner:ID
 }
 
 

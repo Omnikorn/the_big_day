@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import { magic } from "../lib/magic";
-// import { CallToAction, TextButton } from "@magiclabs/ui";
+import { CallToAction, TextButton } from "@magiclabs/ui";
 import { UserContext } from "../lib/UserContext"
 import Auth from "../utils/auth";
 import { IconButton } from "@material-ui/core";
@@ -26,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
 //     };
 const Header = () => {
   const history = useHistory();
-  // const [user, setUser] = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
 
   const logout = () => {
     magic.user.logout().then(() => {
-      // setUser({ user: null });
+      setUser({ user: null });
       history.push("/");
     });
   };
@@ -56,30 +56,42 @@ const Header = () => {
           ) : (
               <> */}
           
-            <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/login')}>
-              Login
-            </Button>
+            <Link to="/login">
+              <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/login')}>
+                Login
+              </Button>
+            </Link>
           
           
-            <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myweddings')}>
-              My Weddings
-            </Button>
+            <Link to="/viewwedding">
+              <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myweddings')}>
+                My Weddings
+              </Button>
+            </Link>
           
 
           
-            <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myGuests')}>
-              My Guests
-            </Button>
+            <Link to="/guests">
+              <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myguests')}>
+                My Guests
+              </Button>
+            </Link>
           
 
           {/* <pre>{JSON.stringify(user, null, 2)}</pre>
                   {user ? ( */}
-          <Button
-            onPress= {logout}
-          >
-            Logout
-            
-          </Button>
+          {/* <Link to={logout}>
+            <Button
+              onPress= {logout}
+            >
+              Logout
+              
+            </Button>
+          </Link> */}
+
+<TextButton color='warning' size='sm' onPress={logout}>
+                  Logout
+                </TextButton>
         </Toolbar>
       </AppBar>
     </div>

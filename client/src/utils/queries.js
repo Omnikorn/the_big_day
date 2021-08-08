@@ -39,8 +39,7 @@ export const ORG_QUERY = gql`
 				venue
 			}
 			guest {
-				
-			id
+			_id
 			}
 		}
 	}

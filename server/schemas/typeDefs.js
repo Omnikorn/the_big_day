@@ -6,6 +6,7 @@ type User {
     username: String!
     email: String!
     wedding: Wedding
+    guest: Guest
 }
 
 # TODO is this for log in authentication instead of password? 
@@ -26,7 +27,7 @@ type Wedding {
     venue: String,
     menu_choice:[String],
     _id:String
-    # wedding_owner:ID
+    wedding_owner:ID
 }
 
 
@@ -65,7 +66,9 @@ type Query {
     user: User
     wedding: Wedding
     weddings: [Wedding]
-    Guest: Guest
+    guest: Guest
+    users:[User]
+    guests:[Guest]
 }
 
 type Mutation {

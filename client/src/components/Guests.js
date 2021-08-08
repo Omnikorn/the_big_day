@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState , useEffect} from "react";
 import Container from "@material-ui/core/Container"
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -7,15 +7,18 @@ import RemoveIcon from "@material-ui/icons/Remove"
 import AddIcon from "@material-ui/icons/Add"
 import Icon from "@material-ui/core/Icon";
 import emailjs from "emailjs-com"
+import Auth from "../utils/auth";
+import { ORG_QUERY } from "../utils/queries";
 
 import {makeStyles} from "@material-ui/core/styles"
+import { useQuery } from "@apollo/client";
 
 const service = process.env.REACT_APP_SERVICE_ID
 const template = process.env.REACT_APP_TEMPLATE_ID
 const user = process.env.REACT_APP_USER_ID
 
 
-
+const testuser = "6109605f79f0bf8d3c072c8f"
 
 const useStyles = makeStyles((theme)=>({
     root:{
@@ -34,6 +37,20 @@ const classes=useStyles()
 const [inputFields, setInputField] = useState([
     {firstName: "", lastName:"", email:"", rsvp:"", menue:""},
 ])
+
+const [organiserState, setOrganiserState] = useState(null)
+
+useEffect(() => {
+    const { organiser } = Auth.loggedIn()
+    console.log(
+        "this is the organiser from local storage",
+        organiser
+    )
+    setOrganiserState(organiser)
+    // const organiser_id = organiserState.user._id
+}, [])
+
+
 
 
 const handleSubmit =(e) =>{
@@ -83,9 +100,17 @@ function sendEmail(index) {
 }
 
 
+const {loading, data} = useQuery(ORG_QUERY)
+if (loading) {
+    return <p>LOADING</p>
+}
+console.log("guest data why= ", data)
+
+
     return (
         <Container>
         <h1> Your Guest List</h1>
+        <p> the user is {JSON.stringify(organiserState)}</p>
         <form className={classes.root} onSubmit={handleSubmit}>
             {inputFields.map((inputField, index)=>(
                 <div key={index}>

@@ -25,7 +25,8 @@ function ViewWedding() {
 	if (loading) {
 		return <p> loading ...</p>
 	}
-	// if (error) return<p>Error...</p>
+	
+console.log("the wedding data from wedding query is" , data)
 
 	const weddingData = data.weddings.filter((wedding) => {
 		const weddingID = "6109605f79f0bf8d3c072c97"

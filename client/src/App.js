@@ -20,6 +20,7 @@ import { setContext } from "@apollo/client/link/context"
 import { PartyProvider , usePartyContext } from "./utils/partycontext"
 import Auth from "./utils/auth"
 
+
 const httpLink = createHttpLink({
 	uri: "/graphql",
 	// credentials: "same-origin"
@@ -73,6 +74,7 @@ console.log("this is the organiser from local storage" , organiser)
 							path="/createwedding"
 							component={CreateWedding}
 						/>
+						
 						<Route
 							exact
 							path="/viewwedding"

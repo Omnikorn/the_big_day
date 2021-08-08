@@ -19,12 +19,12 @@ type Auth {
 
 
 type Wedding {
-    bride_first_name: String,
-    bride_last_name: String,
-    groom_first_name: String,
-    groom_last_name: String,
-    date: String,
-    venue: String,
+    bride_first_name: String!
+    bride_last_name: String!
+    groom_first_name: String!
+    groom_last_name: String!
+    date: String!
+    venue: String!
     menu_choice:[String],
     _id:String
     wedding_owner:ID

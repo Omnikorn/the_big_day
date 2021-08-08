@@ -1,5 +1,5 @@
 
-import  { useContext } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -35,6 +35,8 @@ const Header = () => {
     });
   };
 
+
+
   const classes = useStyles();
 
   // funcction Header() {
@@ -44,59 +46,53 @@ const Header = () => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          {Auth.login() ? (
-              <>
-              <span> Hey loverbirds, {Auth.getProfile().data.username}!</span> */}
-          {/* <Button variant="contained" color="inherit" textAlign="right" onClick={login}>Login</Button>
-          <Button color="inherit" textAlign="left" onClick={logout}>Logout</Button>
-          </>
-          ) : (
-              <> */}
-          
-            <Link to="/login">
-              <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/login')}>
-                Login
-              </Button>
-            </Link>
-          
-          
-            <Link to="/viewwedding">
-              <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myweddings')}>
-                My Weddings
-              </Button>
-            </Link>
-          
-
-          
-            <Link to="/guests">
-              <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myguests')}>
-                My Guests
-              </Button>
-            </Link>
-          
-
-          {/* <pre>{JSON.stringify(user, null, 2)}</pre>
-                  {user ? ( */}
-          {/* <Link to={logout}>
-            <Button
-              onPress= {logout}
-            >
-              Logout
-              
+          <Link to="/">
+            <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myguests')}>
+              Home
             </Button>
-          </Link> */}
+          </Link>
+          <Link to="/home">
+            <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myguests')}>
+              Couple Login
+            </Button>
+          </Link>
+          < Link to="/viewwedding">
+            <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myweddings')}>
+              My Weddings
+            </Button>
+          </Link>
 
-<TextButton color='warning' size='sm' onPress={logout}>
-                  Logout
-                </TextButton>
+
+
+          <Link to="/guests">
+            <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myguests')}>
+              My Guests
+            </Button>
+          </Link>
+
+          {user?.loading ? (
+            <div style={{ height: '58px' }}></div>
+          ) : user?.issuer ? (
+            <>
+
+
+
+              <TextButton color='warning' size='sm' onPress={logout}>
+                Guest Logout
+              </TextButton>
+
+            </>
+          ) : (
+
+            <CallToAction color='primary' size='sm' onPress={() => history.push('/login')}>
+              Guest Login
+            </CallToAction>
+
+          )}
+
         </Toolbar>
       </AppBar>
-    </div>
-
-    // };
-  );
-};
+    </div >
+  )
+}
 export default Header;

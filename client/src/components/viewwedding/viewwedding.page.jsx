@@ -6,12 +6,18 @@ import React, {
 import { PartyContext } from "../../utils/partycontext"
 import { useQuery } from "@apollo/client"
 import { WEDDING_QUERY } from "../../utils/queries"
+
+import { useHistory } from 'react-router-dom';
+import { magic } from '../../lib/magic';
+import { UserContext } from '../../lib/UserContext';
 import Auth from "../../utils/auth"
-const weddingID = "6109605f79f0bf8d3c072c97"
 
-function ViewWedding() {
+// import Loading from './loading';
+ const weddingID = "6109605f79f0bf8d3c072c97"
+ const Callback = (props) => {
+	const history = useHistory();
+	const [user, setUser] = useContext(UserContext);
 	const [organiserState, setOrganiserState] = useState(null)
-
 	useEffect(() => {
 		const { organiser } = Auth.loggedIn()
 		console.log(
@@ -20,6 +26,33 @@ function ViewWedding() {
 		)
 		setOrganiserState(organiser)
 	}, [])
+	function ViewWedding() {
+	
+	  };
+	  
+	  // `loginWithCredential()` returns a didToken for the user logging in
+	  const finishEmailRedirectLogin = () => {
+		const magicCredential = new URLSearchParams(props.location.search).get('magic_credential');
+		if (magicCredential) magic.auth.loginWithCredential().then(didToken => authenticateWithServer(didToken));
+	  };
+	  
+	  // Send token to server to validate
+	  const authenticateWithServer = async didToken => {
+		const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/login`, {
+		  method: 'POST',
+		  headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + didToken,
+		  },
+		});
+	  
+		if (res.status === 200) {
+		  // Set the UserContext to the now logged in user
+		  const userMetadata = await magic.user.getMetadata();
+		  await setUser(userMetadata);
+		//   history.push('/profile');
+		}
+	  };
 
 	const { loading, data } = useQuery(WEDDING_QUERY)
 	if (loading) {
@@ -64,4 +97,4 @@ console.log("the wedding data from wedding query is" , data)
 	)
 }
 
-export default ViewWedding
+export default Callback

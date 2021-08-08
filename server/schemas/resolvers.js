@@ -15,8 +15,10 @@ const resolvers = {
         //     throw new AuthenticationError('You are not logged in');
         // },
 
-        user: async (parent, {email})=> {
-            return User.findOne({email}).populate("wedding","guests")
+        user: async (parent, arg)=> {
+            const userData = await User.findOne(arg._id)
+            console.log("the single user is=" , userData)
+            return userData
         },
         
 
@@ -27,17 +29,20 @@ const resolvers = {
         },
         wedding: async (parent, args, context) => {
             // TODO : add logic here please since we have a 
-            // if (.wedding) {
-            const weddingData = await Wedding.find({})
-            // console.log("weddingData :::",weddingData)
-            return weddingData
-            
-        }, 
+            return
+        },
 
-        // guest: async (parent, args, context) => {
-        //     const guestData = await Guest.findAll({wedding})
-        //     return guestsData
+        // users: async (parent, args ,context) => {
+        //     const allUsers = await User.find({})
+        //     console.log("All users are =" , allUsers)
+        //     return allUsers
         // }
+
+        users: async () => {
+            return User.find().populate('Guests')
+        }
+
+
     },
 
     // TODO we need a query to find all guest related to a single wedding 

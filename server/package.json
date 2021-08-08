@@ -15,6 +15,8 @@
     "express": "^4.17.1",
     "graphql": "^15.5.1",
     "jsonwebtoken": "^8.5.1",
+    "magic": "^2.3.5-alpha.1",
+    "magic-sdk": "^4.4.0",
     "mongoose": "^5.13.3",
     "nodemon": "^2.0.12",
     "react": "^17.0.2",

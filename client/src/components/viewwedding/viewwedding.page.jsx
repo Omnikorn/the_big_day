@@ -57,7 +57,8 @@ import Auth from "../../utils/auth"
 	if (loading) {
 		return <p> loading ...</p>
 	}
-	// if (error) return<p>Error...</p>
+	
+console.log("the wedding data from wedding query is" , data)
 
 	const weddingData = data.weddings.filter((wedding) => {
 		const weddingID = wedding._id

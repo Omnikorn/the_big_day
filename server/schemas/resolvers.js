@@ -27,8 +27,17 @@ const resolvers = {
         },
         wedding: async (parent, args, context) => {
             // TODO : add logic here please since we have a 
-            return
-        } 
+            // if (.wedding) {
+            const weddingData = await Wedding.find({})
+            // console.log("weddingData :::",weddingData)
+            return weddingData
+            
+        }, 
+
+        // guest: async (parent, args, context) => {
+        //     const guestData = await Guest.findAll({wedding})
+        //     return guestsData
+        // }
     },
 
     // TODO we need a query to find all guest related to a single wedding 

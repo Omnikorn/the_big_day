@@ -13,11 +13,10 @@ import { UserContext } from '../../lib/UserContext';
 import Auth from "../../utils/auth"
 
 // import Loading from './loading';
- const weddingID = "6109605f79f0bf8d3c072c97"
  const Callback = (props) => {
 	const history = useHistory();
 	const [user, setUser] = useContext(UserContext);
-	const [organiserState, setOrganiserState] = useState(null)
+	const [organiserState, setOrganiserState] = useState()
 	useEffect(() => {
 		const { organiser } = Auth.loggedIn()
 		console.log(
@@ -62,8 +61,8 @@ import Auth from "../../utils/auth"
 console.log("the wedding data from wedding query is" , data)
 
 	const weddingData = data.weddings.filter((wedding) => {
-		const weddingID = "6109605f79f0bf8d3c072c97"
-		return wedding._id === "6109605f79f0bf8d3c072c97"
+		const weddingID = wedding._id
+		return wedding._id 
 	})
 
 	console.log("the wedding data is ", data.weddings)

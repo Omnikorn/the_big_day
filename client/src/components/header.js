@@ -3,18 +3,15 @@ import { useHistory } from 'react-router-dom';
 import { magic } from '../lib/magic';
 import { UserContext } from '../lib/UserContext';
 import { CallToAction, TextButton } from '@magiclabs/ui';
-
 const Header = () => {
   const history = useHistory();
   const [user, setUser] = useContext(UserContext);
-
   const logout = () => {
     magic.user.logout().then(() => {
       setUser({ user: null });
       history.push('/');
     });
   };
-
   return (
     <header>
       <nav>
@@ -29,7 +26,6 @@ const Header = () => {
                   Home
                 </TextButton>
               </li>
-           
               <li>
                 <TextButton color='warning' size='sm' onPress={logout}>
                   Logout
@@ -50,7 +46,7 @@ const Header = () => {
           max-width: 45rem;
           margin: 0 auto 50px;
           padding: 1.25rem 1.25rem;
-          border-bottom: 1px solid #f0f0f0;
+          border-bottom: 1px solid #F0F0F0;
         }
         ul {
           display: flex;
@@ -67,5 +63,10 @@ const Header = () => {
     </header>
   );
 };
-
 export default Header;
+
+
+
+
+
+

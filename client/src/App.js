@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useContext, useMemo, useEffect } from "react"
 import {
 	BrowserRouter as Router,
 	Route,
-	
 } from "react-router-dom"
 import "./App.css"
 import CreateWedding from "./components/createwedding/createwedding.form"
@@ -21,6 +20,8 @@ import {
 	InMemoryCache,
 } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
+import { PartyProvider , usePartyContext } from "./utils/partycontext"
+import Auth from "./utils/auth"
 
 
 const httpLink = createHttpLink({
@@ -31,6 +32,8 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => {
 	// get the authentication token from local storage if it exists
 	const token = localStorage.getItem("id_token")
+	// const localUser = localStorage.getItem("user")
+	// 	const organiser = JSON.parse(localUser)
 	// return the headers to the context so httpLink can read them
 	return {
 		headers: {
@@ -47,8 +50,13 @@ const client = new ApolloClient({
 
 
 function App() {
+	const partycontext = usePartyContext()
+	console.log("party context=" , partycontext)
 	const [user, setUser] = useState();
-
+	useEffect (()=>{
+		const {organiser} = Auth.loggedIn()
+		console.log("this is the organiser from local storage" , organiser)
+			},[]) 
   // If isLoggedIn is true, set the UserContext with user data
   // Otherwise, set it to {user: null}
   useEffect(() => {
@@ -61,7 +69,7 @@ function App() {
   }, []);
 	return (
 		<ApolloProvider client={client}>
-			
+			<PartyProvider>
 			<Router>
 			
 			<UserContext.Provider value={[user, setUser]}>
@@ -87,9 +95,15 @@ function App() {
 					/>
 				</div>
 				</UserContext.Provider>
+				
 			</Router>
-		</ApolloProvider>
-	)
-}
+			</PartyProvider>
+			</ApolloProvider>
+			)}
+	// only changes provider value if one of the params change (may need to remove)
+	// const value = useMemo(()=>({organiser, setOrganiser}),[organiser,setOrganiser])
+
+
+
 
 export default App

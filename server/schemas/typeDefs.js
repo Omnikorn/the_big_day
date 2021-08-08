@@ -25,7 +25,8 @@ type Wedding {
     date: String!
     venue: String!
     menu_choice:[String],
-    wedding_owner:ID
+    _id:String
+    # wedding_owner:ID
 }
 
 

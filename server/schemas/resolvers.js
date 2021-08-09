@@ -1,4 +1,4 @@
-const { User, Wedding  } = require('../models');
+const { User, Wedding, Guests  } = require('../models');
 const {AuthenticationError} = require ("apollo-server-express")
 const { signToken } = require('../utils/auth');
 
@@ -15,12 +15,9 @@ const resolvers = {
         //     throw new AuthenticationError('You are not logged in');
         // },
 
-        finduser: async (parent, arg)=> {
-            const userData = await User.findOne(arg.userId)
-            console.log("the single user is=" , userData)
-            return userData
+        user: async (parent, args)=> {
+            return await User.findById(args.userId).populate("guests")
         },
-        
 
         weddings: async (parent, args, context) => {
             const weddingData = await Wedding.find({})

@@ -39,6 +39,8 @@ const [inputFields, setInputField] = useState([
 ])
 
 const [organiserState, setOrganiserState] = useState(null)
+const [currentUser , setCurrentUser] = useState(null)
+const [currentID , setCurrentID] = useState(null)
 
 useEffect(() => {
     const { organiser } = Auth.loggedIn()
@@ -46,9 +48,8 @@ useEffect(() => {
         "this is the organiser from local storage",
         organiser
     )
-    setOrganiserState(organiser)
-
-    // const organiser_id = organiserState.user._id
+   setCurrentUser(organiser.username)
+   setCurrentID(organiser._id)
 }, [])
 
 
@@ -100,12 +101,12 @@ function sendEmail(index) {
         .catch((err) => console.log(err))
 }
 
-console.log("this is the organiserState", organiserState)
+console.log("this is the current user", currentUser)
 
 
 
 
-const {loading, data} = useQuery(ORG_QUERY , {variables:{userid: "6109605f79f0bf8d3c072c90"}})
+const {loading, data} = useQuery(ORG_QUERY, {variables: {userId:currentID}} )
 if (loading) {
     return <p>LOADING</p>
 }
@@ -119,9 +120,9 @@ console.log("the data from org query is " , newUser)
         <Container>
          
         <h1> Your Guest List</h1>
-        <p> my test user id is </p>
-        <p>the organiser is {organiserState.username} </p>
-        <p> the user id is {organiserState._id}</p>
+        <p> my test user id is</p>
+        <p>the organiser is {currentUser} </p>
+        <p> the user id is {currentID}</p>
         <form className={classes.root} onSubmit={handleSubmit}>
             {inputFields.map((inputField, index)=>(
                 <div key={index}>

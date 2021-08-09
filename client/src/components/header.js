@@ -36,64 +36,97 @@ const Header = () => {
     });
   };
 
-  
+  const gLogout = () => {
+    {
+      user.logout().then(() => {
+        setUser({ user: null });
+        history.push("/");
+      })
+    }}
 
-  const classes = useStyles();
+
+
+
+
+        const classes = useStyles();
 
   // funcction Header() {
-  //   const { user, setUser } = useContext(USerContext);
+  //   const {user, setUser} = useContext(USerContext);
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Link to="/">
-            <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myguests')}>
-              Home
-            </Button>
-          </Link>
-          <Link to="/home">
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <Link to="/">
+                <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myguests')}>
+                  Home
+                </Button>
+              </Link>
+              {/* <Link to="/home">
             <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myguests')}>
               Couple Login
             </Button>
-          </Link>
-          < Link to="/viewwedding">
-            <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myweddings')}>
-              My Weddings
-            </Button>
-          </Link>
+          </Link> */}
+              < Link to="/viewwedding">
+                <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myweddings')}>
+                  My Weddings
+                </Button>
+              </Link>
 
 
 
-          <Link to="/guests">
-            <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myguests')}>
-              My Guests
-            </Button>
-          </Link>
+              <Link to="/guests">
+                <Button variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myguests')}>
+                  My Guests
+                </Button>
+              </Link>
 
-          {user?.loading ? (
-            <div style={{ height: '58px' }}></div>
-          ) : user?.issuer ? (
-            <>
+              {user?.loading ? (
+                <div style={{ height: '58px' }}></div>
+              ) : user?.issuer ? (
+                <>
 
 
 
-              <TextButton color='warning' size='sm' onPress={logout}>
-                Guest Logout
-              </TextButton>
+                  <TextButton color='warning' size='sm' onPress={logout}>
+                    Guest Logout
+                  </TextButton>
 
-            </>
-          ) : (
+                </>
+              ) : (
 
-            <CallToAction color='primary' size='sm' onPress={() => history.push('/login')}>
-              Guest Login
-            </CallToAction>
+                <CallToAction color='primary' size='sm' onPress={() => history.push('/login')}>
+                  Guest Login
+                </CallToAction>
 
-          )}
+              )}
 
-        </Toolbar>
-      </AppBar>
-    </div >
-  )
-}
-export default Header;
+
+              {user?.loading ? (
+                <div style={{ height: '58px' }}></div>
+              ) : user?.issuer ? (
+                <>
+
+
+
+                  <TextButton color='warning' size='sm' onPress={gLogout}>
+                    Couple Logout
+                  </TextButton>
+
+                </>
+              ) : (
+
+                <CallToAction color='primary' size='sm' onPress={() => history.push('/home')}>
+                  Couple Login
+                </CallToAction>
+
+              )}
+
+
+            </Toolbar>
+          </AppBar>
+        </div >
+  )}
+
+        export default Header;
+                             

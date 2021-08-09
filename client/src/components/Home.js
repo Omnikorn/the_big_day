@@ -18,7 +18,6 @@ import { LOGIN_USER } from "../utils/mutations"
 import Auth from "../utils/auth"
 import { usePartyContext } from "../utils/partycontext"
 
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: "100vh",
@@ -56,10 +55,9 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
 	const classes = useStyles()
 
-	const { organiser, setOrganiser } =
-		usePartyContext();
+	const { organiser, setOrganiser } = usePartyContext()
 
-    // console.log("first set of organisers=" , organiser)
+	// console.log("first set of organisers=" , organiser)
 
 	const [userFormData, setUserFormData] = useState({
 		email: "",
@@ -71,7 +69,7 @@ export default function SignIn() {
 	const handleInputChange = (event) => {
 		const { name, value } = event.target
 		setUserFormData({ ...userFormData, [name]: value })
-    setOrganiser(value)
+		setOrganiser(value)
 		// console.log("data is", userFormData)
 	}
 
@@ -90,7 +88,7 @@ export default function SignIn() {
 			})
 			const newuser = data.login.user
 			console.log("the new user is ", newuser)
-			// setOrganiser(newuser)
+			setOrganiser(newuser)
 			// console.log("the organiser state is ", organiser)
 			// console.log(
 			// 	"this is the data coming back from the login",

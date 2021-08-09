@@ -6,7 +6,7 @@ type User {
     username: String!
     email: String!
     wedding: Wedding
-    guest: Guest
+    guests: Guest
 }
 
 # TODO is this for log in authentication instead of password? 
@@ -46,7 +46,7 @@ input WeddingData {
 
 type Guest {
     name: String,
-    email: String!
+    email: String!,
     rsvp: String,
     menu:String,
     _id: ID
@@ -55,7 +55,7 @@ type Guest {
 
 input guestData {
     name: String,
-    email: String!
+    email: String!,
     rsvp: String,
     menu:String,
         # wedding_owner:ID
@@ -65,6 +65,7 @@ input guestData {
 type Query {
     # me: User
     user: User
+    finduser(userId:String): User
     wedding: Wedding
     weddings: [Wedding]
     guest: Guest

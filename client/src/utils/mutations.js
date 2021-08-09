@@ -7,16 +7,7 @@ export const LOGIN_USER = gql`
 			user {
 				_id
 				username
-				wedding{
-					bride_first_name
-    bride_last_name
-    groom_first_name
-    groom_last_name
-    date
-    venue
-    menu_choice
-    _id
-				}
+				
 				
 			}
 		}

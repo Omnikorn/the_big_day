@@ -18,7 +18,7 @@ const template = process.env.REACT_APP_TEMPLATE_ID
 const user = process.env.REACT_APP_USER_ID
 
 
-const testuser = "6109605f79f0bf8d3c072c8f"
+
 
 const useStyles = makeStyles((theme)=>({
     root:{
@@ -47,6 +47,7 @@ useEffect(() => {
         organiser
     )
     setOrganiserState(organiser)
+
     // const organiser_id = organiserState.user._id
 }, [])
 
@@ -99,18 +100,28 @@ function sendEmail(index) {
         .catch((err) => console.log(err))
 }
 
+console.log("this is the organiserState", organiserState)
 
-const {loading, data} = useQuery(ORG_QUERY)
+
+
+
+const {loading, data} = useQuery(ORG_QUERY , {variables:{userid: "6109605f79f0bf8d3c072c90"}})
 if (loading) {
     return <p>LOADING</p>
 }
-console.log("guest data why= ", data)
+let newUser = data
+console.log("the data from org query is " , newUser)
+
 
 
     return (
+
         <Container>
+         
         <h1> Your Guest List</h1>
-        <p> the user is {JSON.stringify(organiserState)}</p>
+        <p> my test user id is </p>
+        <p>the organiser is {organiserState.username} </p>
+        <p> the user id is {organiserState._id}</p>
         <form className={classes.root} onSubmit={handleSubmit}>
             {inputFields.map((inputField, index)=>(
                 <div key={index}>

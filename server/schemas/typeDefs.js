@@ -50,7 +50,7 @@ type Guest {
     rsvp: String,
     menu:String,
     _id: ID
-    # wedding_owner:ID
+    wedding_owner:String
 }
 
 input guestData {
@@ -58,14 +58,14 @@ input guestData {
     email: String!,
     rsvp: String,
     menu:String,
-        # wedding_owner:ID
+ wedding_owner:String
 }
 
 
 type Query {
     # me: User
-    user: User
-    finduser(userId:String): User
+    # user: User
+    user(userId:String): User
     wedding: Wedding
     weddings: [Wedding]
     guest: Guest

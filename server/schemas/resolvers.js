@@ -15,8 +15,8 @@ const resolvers = {
         //     throw new AuthenticationError('You are not logged in');
         // },
 
-        user: async (parent, arg)=> {
-            const userData = await User.findOne(arg._id)
+        finduser: async (parent, arg)=> {
+            const userData = await User.findOne(arg.userId)
             console.log("the single user is=" , userData)
             return userData
         },
@@ -38,9 +38,11 @@ const resolvers = {
         //     return allUsers
         // }
 
-        users: async () => {
-            return User.find().populate('Guests')
-        }
+
+        // might need to use the populate method on top 
+        // users: async (parent, args) => {
+        //     return User.findById(args.userId)
+        // }
 
 
     },

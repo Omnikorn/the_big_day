@@ -15,41 +15,55 @@ import { LOGIN_USER
  import Auth from "../utils/auth"
  import { usePartyContext } from '../utils/partycontext';
 
- 
-
-
-
-
 const useStyles = makeStyles((theme) => ({
-  root: {
-    height: '100vh',
-  },
-  image: {
-    backgroundImage: 'url(https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', 
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+	root: {
+		height: "100vh",
+	},
+	image: {
+		backgroundImage:
+			"url(https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)",
+		backgroundRepeat: "no-repeat",
+		backgroundColor:
+			theme.palette.type === "light"
+				? theme.palette.grey[50]
+				: theme.palette.grey[900],
+		backgroundSize: "cover",
+		backgroundPosition: "center",
+	},
+	paper: {
+		margin: theme.spacing(8, 4),
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+	},
+	avatar: {
+		margin: theme.spacing(1),
+		backgroundColor: theme.palette.secondary.main,
+	},
+	form: {
+		width: "100%",
+		marginTop: theme.spacing(1),
+	},
+	submit: {
+		margin: theme.spacing(3, 0, 2),
+	},
+}))
+
+export default function SignIn() {
+	const classes = useStyles()
+
+	const { organiser, setOrganiser } = usePartyContext()
+
+	// console.log("first set of organisers=" , organiser)
+
+
+
+	const handleInputChange = (event) => {
+		const { name, value } = event.target
+		setUserFormData({ ...userFormData, [name]: value })
+		setOrganiser(value)
+		// console.log("data is", userFormData)
+	}
 
 export default function SignIn() {
   const classes = useStyles();
@@ -59,13 +73,23 @@ const [userFormData, setUserFormData] = useState({email: "", password:""})
 // const [showAlert, setShowAlert] = useState(false)
 const [login, {error , data}] = useMutation(LOGIN_USER)
 
-// useEffect(()=>{
-//   if(error){
-//     setShowAlert(true)
-//   } else {
-//     setShowAlert(false)
-//   }
-// }, [error]);
+		// const form = event.currentTarget;
+		// if (form.checkValidity()===false){
+		//   event.preventDefault();
+		//   event.stopPropagation();
+		// }
+		try {
+			const { data } = await login({
+				variables: { ...userFormData },
+			})
+			const newuser = data.login.user
+			console.log("the new user is ", newuser)
+			setOrganiser(newuser)
+			// console.log("the organiser state is ", organiser)
+			// console.log(
+			// 	"this is the data coming back from the login",
+			// 	data
+			// )
 
 const handleInputChange = (event) =>{
   const {name, value} = event.target;
@@ -161,4 +185,4 @@ setUserFormData({
       </Grid>
     </Grid>
   );
-}
+  }

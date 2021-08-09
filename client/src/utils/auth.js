@@ -21,6 +21,7 @@ class AuthService {
 		// If the expiration time is less than the current time (in seconds), the token is expired and we return `true`
 		if (decoded.exp < Date.now() / 1000) {
 			localStorage.removeItem("id_token")
+		// TODO added this line to make sure if the user is logged out the data is removed
 			localStorage.removeItem("user")
 			return true
 		}
@@ -46,6 +47,7 @@ class AuthService {
 
 	logout() {
 		localStorage.removeItem("id_token")
+		// TODO added this line to make sure if the user is logged out the data is removed
 		localStorage.removeItem("user")
 		window.location.assign("/")
 	}

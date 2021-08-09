@@ -3,24 +3,24 @@ const { Schema, model } = require("mongoose");
 const weddingSchema = new Schema({
   bride_first_name: {
     type: String,
-    required: true,
-    unique: true,
+    // required: true,
+    // unique: true,
     trim: true,
   },
   bride_last_name: {
     type: String,
-    required: true,
-    unique: true,
+    // required: true,
+    // unique: true,
   },
   groom_first_name: {
     type: String,
-    required: true,
-    unique: true,
+    // required: true,
+    // unique: true,
   },
   groom_last_name: {
     type: String,
-    required: true,
-    unique: true,
+    // required: true,
+    // unique: true,
   },
   date: {
     type: String,
@@ -28,8 +28,8 @@ const weddingSchema = new Schema({
   },
   venue: {
     type: String,
-    required: true,
-    unique: true,
+    // required: true,
+    // unique: true,
   },
   menu_choice: [
     {
@@ -42,7 +42,7 @@ const weddingSchema = new Schema({
   },
   wedding_owner:{
     type:String,
-    required:true,
+    // required:true,
     trim:true
   },
 

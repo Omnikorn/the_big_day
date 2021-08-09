@@ -11,6 +11,7 @@ import { CallToAction, TextButton } from "@magiclabs/ui";
 import { UserContext } from "../lib/UserContext"
 import Auth from "../utils/auth";
 import { IconButton } from "@material-ui/core";
+import { spacing } from '@material-ui/system';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,7 @@ const Header = () => {
     });
   };
 
-
+  
 
   const classes = useStyles();
 

@@ -40,6 +40,8 @@ function Guests() {
 	const [currentUser, setCurrentUser] = useState(null)
 	const [currentID, setCurrentID] = useState(null)
 
+
+
 	useEffect(() => {
 		const { organiser } = Auth.loggedIn()
 		console.log(
@@ -50,11 +52,30 @@ function Guests() {
 		setCurrentID(organiser._id)
 	}, [])
 
+const [addGuests, {error}] = useMutation(ADD_GUESTS)
+
 	const handleSubmit = (e) => {
 		e.preventDefault()
         // TODO needs logic to add all guests back to database
-        const finalGuestList=[...inputFields,...filteredGuestList]
-		console.log("final guest list", finalGuestList)
+        // const finalGuestList=[...inputFields,...filteredGuestList]
+		console.log("the input field list", inputFields)
+		let i
+		for(i=0; i<inputFields.length; i++){
+			console.log("i=", i, "input= ", inputFields[i])
+// try{
+// 	const {data} = addGuests({
+// 		variables:{
+// 			name:inputFields[i].name,
+// 			email:inputFields[i].email,
+// 			rsvp:inputFields[i].rsvp,
+// 			menu:inputFields[i].menu,
+// 			wedding_owner:currentUser
+// 		}
+// 	})
+// } catch(err){
+// 	console.log(err)
+// }
+		}
 		
 	}
 
@@ -69,11 +90,10 @@ function Guests() {
 		setInputField([
 			...inputFields,
 			{
-				firstName: "",
-				lastName: "",
+				name: "",
 				email: "",
 				rsvp: "",
-				menue: "",
+				menu: "",
 			},
 		])
 	}
@@ -88,13 +108,13 @@ function Guests() {
 		// function to send email to each guest based on their index in the table
 		const values = [...inputFields]
 		const email = values[index].email
-		const first_name = values[index].firstName
-		const last_name = values[index].lastName
+		const name = values[index].name
+		
 
 		const params = {
-			first_name: first_name,
+			name: name,
 			email: email,
-			last_name: last_name,
+			
 		}
 
 		emailjs

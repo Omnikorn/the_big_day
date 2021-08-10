@@ -33,3 +33,9 @@ export const ADD_USER = gql`
 		}
 	}
 `
+
+
+// export const ADD_GUESTS = gql`
+// mutation addGuests ($finalGuestList: Array)
+
+// `

@@ -27,7 +27,7 @@ type Wedding {
     venue: String!
     menu_choice:[String],
     _id:String
-    wedding_owner:ID
+    wedding_owner:String
 }
 
 
@@ -40,7 +40,7 @@ input WeddingData {
     date: String,
     venue: String,
     menu_choice:[String],
-    wedding_owner:ID
+    wedding_owner:String
 }
 
 
@@ -75,7 +75,7 @@ type Query {
 
 type Mutation {
     createWedding(wedding: WeddingData):Wedding
-    addGuest(Guest:guestData):Guest
+    addGuests(Guest:guestData):Guest
     login(email: String!, password: String!): Auth
     addUser(username: String! email: String!, password: String!): Auth
     # removeUSer(userId: ID!): User

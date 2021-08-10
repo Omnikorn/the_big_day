@@ -30,8 +30,21 @@ export const ORG_QUERY = gql`
 			username
 			_id
 			
-			
+						
 		}
 	}
+`
+
+export const GUEST_QUERY = gql`
+query getGuests{
+	guests{
+		name
+		email
+		rsvp
+		menu
+		_id
+		wedding_owner
+	}
+}
 `
 

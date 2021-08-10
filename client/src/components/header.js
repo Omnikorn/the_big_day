@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 //     const logout = (event) => {
 //         event.preventDefault();
 //         Auth.logout();
-//     };
+//     };,
 const Header = () => {
   const history = useHistory();
   const [user, setUser] = useContext(UserContext);

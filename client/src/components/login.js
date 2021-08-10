@@ -27,7 +27,7 @@ const Login = () => {
          // optional redirect back to your app after magic link is clicked
         })
       // console.log("email is:   ",email);
-      // function store (email) {localStorage.setItem("guestEmail", email)}
+      // f,unction store (email) {localStorage.setItem("guestEmail", email)}
       
 
       // Validate didToken with server

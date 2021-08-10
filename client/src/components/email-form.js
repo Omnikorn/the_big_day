@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   }));
+  
 const EmailForm = ({ onEmailSubmit, disabled }) => {
     const [email, setEmail] = useState('');
     const classes = useStyles();

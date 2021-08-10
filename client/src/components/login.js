@@ -22,8 +22,13 @@ const Login = () => {
       // Trigger Magic link to be sent to user
       let didToken = await magic.auth.loginWithMagicLink({
         email,
-        redirectURI: new URL('/viewwedding', window.location.origin).href, // optional redirect back to your app after magic link is clicked
-      });
+        redirectURI: new URL('/viewwedding', window.location.origin).href,
+        
+         // optional redirect back to your app after magic link is clicked
+        })
+      // console.log("email is:   ",email);
+      // f,unction store (email) {localStorage.setItem("guestEmail", email)}
+      
 
       // Validate didToken with server
       const res = await fetch(`${process.env.REACT_APP_MAGIC_KEY}/api/login`, {
@@ -57,7 +62,7 @@ const Login = () => {
     <>
       <div className='login'>
         <EmailForm disabled={disabled} onEmailSubmit={handleLoginWithEmail} />
-        <SocialLogins onSubmit={handleLoginWithSocial} />
+        
       </div>
       <style>{`
         .login {

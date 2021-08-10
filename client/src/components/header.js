@@ -29,20 +29,34 @@ const Header = () => {
   const history = useHistory();
   const [user, setUser] = useContext(UserContext);
 
-  const logout = () => {
+  const Logout = () => {
     magic.user.logout().then(() => {
       setUser({ user: null });
+      localStorage.removeItem("guestEmail")
       history.push("/");
-    });
+      
+    })
+    
   };
 
-  const gLogout = () => {
-    {
-      user.logout().then(() => {
-        setUser({ user: null });
-        history.push("/");
-      })
-    }}
+  const authenticateWithServer = async didToken => {
+		const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/login`, {
+		  method: 'POST',
+		  headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + didToken,
+		  },
+		});
+	  
+		if (res.status === 200) {
+		  // Set the UserContext to the now logged in user
+		  const {email} = await magic.user.getMetadata();
+		  await setUser(email);
+		//   history.push('/profile');
+		console.log("email address is:  ",email)
+
+		}
+	  };
 
 
 
@@ -88,7 +102,7 @@ const Header = () => {
 
 
 
-                  <TextButton color='warning' size='sm' onPress={logout}>
+                  <TextButton color='warning' size='sm' onPress={Logout}>
                     Guest Logout
                   </TextButton>
 
@@ -109,7 +123,7 @@ const Header = () => {
 
 
 
-                  <TextButton color='warning' size='sm' onPress={gLogout}>
+                  <TextButton color='warning' size='sm' onPress={Logout}>
                     Couple Logout
                   </TextButton>
 

@@ -9,10 +9,12 @@ const useStyles = makeStyles((theme) => ({
 const EmailForm = ({ onEmailSubmit, disabled }) => {
     const [email, setEmail] = useState('');
     const classes = useStyles();
+    console.log("email is:    ", email)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         onEmailSubmit(email);
+        localStorage.setItem("guestEmail", email)
     };
 
     return (

@@ -28,25 +28,15 @@ const resolvers = {
             // TODO : add logic here please since we have a 
             return
         },
-
-        // users: async (parent, args ,context) => {
-        //     const allUsers = await User.find({})
-        //     console.log("All users are =" , allUsers)
-        //     return allUsers
-        // }
-
-
-        // might need to use the populate method on top 
-        // users: async (parent, args) => {
-        //     return User.findById(args.userId)
-        // }
-
+guests: async (parent, args)=>{
+    const guestList = await Guests.find({})
+    console.log("guest list is", guestList)
+    return guestList
+}
+        
 
     },
 
-    // TODO we need a query to find all guest related to a single wedding 
-    // TODO do we need seperate queries/mutations for entering venues and dates etc ?  
-    // TODO where are we setting the context for wedding ? do we need all the wedding as contex or just the id 
 
 
     Mutation: {
@@ -72,6 +62,17 @@ const resolvers = {
             console.log("user=", user)
             return { token, user };
         },
+
+
+        addGuests: async (parent, args) =>{
+            try {
+                for (i=0; i<args.finalGuestList.length; i++  ){
+                await Guests.create(finalGuestList) 
+            }}
+            catch(err) {
+                console.log(err)
+            }
+        }
     }
 
 };

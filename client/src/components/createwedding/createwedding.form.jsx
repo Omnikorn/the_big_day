@@ -49,24 +49,24 @@ function CreateWedding() {
 		setInputField(values)
 	}
 
-	const handleAddField = () => {
-		setInputField([
-			...inputFields,
-			{
-				firstName: "",
-				lastName: "",
-				email: "",
-				rsvp: "",
-				menue: "",
-			},
-		])
-	}
+	// const handleAddField = () => {
+	// 	setInputField([
+	// 		...inputFields,
+	// 		{
+	// 			firstName: "",
+	// 			lastName: "",
+	// 			email: "",
+	// 			rsvp: "",
+	// 			menue: "",
+	// 		},
+	// 	])
+	// }
 
-	const handleRemoveField = (index) => {
-		const values = [...inputFields]
-		values.splice(index, 1)
-		setInputField(values)
-	}
+	// const handleRemoveField = (index) => {
+	// 	const values = [...inputFields]
+	// 	values.splice(index, 1)
+	// 	setInputField(values)
+	// }
 
 	return (
 		<Container className="bigcontainer">

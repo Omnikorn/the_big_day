@@ -7,6 +7,7 @@ import "./App.css"
 import CreateWedding from "./components/createwedding/createwedding.form"
 import Guests from "./components/Guests"
 import Home from "./components/Home"
+import Createuser from "./components/createuser"
 import Login from "./components/login"
 import Header from "./components/header"
 import { magic } from './lib/magic';
@@ -93,6 +94,7 @@ function App() {
 						path="/viewwedding"
 						component={ViewWedding}
 					/>
+					<Route exact path ="/createuser" component={Createuser} />
 				</div>
 				</UserContext.Provider>
 				

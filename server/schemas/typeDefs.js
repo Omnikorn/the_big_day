@@ -75,9 +75,10 @@ type Query {
 
 type Mutation {
     createWedding(wedding: WeddingData):Wedding
-    addGuests(Guest:guestData):Guest
+    addGuests(input:guestData):Guest
     login(email: String!, password: String!): Auth
     addUser(username: String! email: String!, password: String!): Auth
+    
     # removeUSer(userId: ID!): User
     # TODO we can add remove user later not needed for minimum product ? 
 }

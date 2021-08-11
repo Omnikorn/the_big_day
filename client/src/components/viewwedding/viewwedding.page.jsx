@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom"
 import { magic } from "../../lib/magic"
 import { UserContext } from "../../lib/UserContext"
 import Auth from "../../utils/auth"
+import CountDown from "../countdown/Count.component"
 
 
 // import Loading from './loading';
@@ -34,7 +35,7 @@ const Callback = (props) => {
 
 	console.log("the currentUser is ", currentUser)
 	console.log("the current ID is", currentID)
-	function ViewWedding() {}
+	// function ViewWedding() {}
 
 	// `loginWithCredential()` returns a didToken for the user logging in
 	const finishEmailRedirectLogin = () => {
@@ -101,7 +102,7 @@ const Callback = (props) => {
 						<h3>{wedding.date}</h3>
 						<p>that's in</p>
 						<h3>COUNT DOWN HERE</h3>
-
+						<CountDown deadline={wedding.date} />
 						<p> You have invited your friends and family to join you at </p>
 						<h3>{wedding.venue}</h3>
 						<p> and you have offered them a menu choice of</p>

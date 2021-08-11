@@ -12,7 +12,7 @@ const Login = () => {
 
   // If user is already logged in, redirect to profile page
   useEffect(() => {
-    user && user.issuer && history.push('/viewedding');
+    user && user.issuer && history.push('/login');
   }, [user, history]);
 
   async function handleLoginWithEmail(email) {

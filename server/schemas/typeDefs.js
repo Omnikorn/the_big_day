@@ -67,7 +67,7 @@ const typeDefs = gql`
 	}
 
 	type Mutation {
-		createWedding(wedding: WeddingData): Wedding
+		addWedding(bride_first_name: String, bride_last_name: String, groom_first_name: String, groom_last_name: String, date: String, venue: String, menu_choice: [String], wedding_owner: String):Wedding
 		addGuests(name: String!, email: String!, rsvp: String!, menu: String!, wedding_owner: String!): Guest
 		login(email: String!, password: String!): Auth
 		addUser(

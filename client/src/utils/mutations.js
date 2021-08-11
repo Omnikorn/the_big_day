@@ -61,6 +61,24 @@ export const ADD_GUESTS = gql`
 		}
 	
 `
+export const ADD_WEDDING = gql`
+mutation addWedding ( 
+	$bride_first_name: String
+    $bride_last_name: String
+	$groom_first_name: String
+	$groom_last_name: String
+	$date: String
+	$venue: String
+	$menu_choice: [String]
+	$wedding_owner: String
+)
+{ addWedding(bride_first_name: $bride_first_name, bride_last_name: $bride_last_name, groom_first_name: $groom_first_name, groom_last_name: $groom_last_name, date: $date, venue: $venue, menu_choice: $menu_choice, wedding_owner: $wedding_owner)
+{
+	bride_first_name
+}
+}
+
+`
 
 // export const ADD_GUESTS =gql`
 // mutation Mutation($input:guestData){

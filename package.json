@@ -15,5 +15,10 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "react-animated-burgers": "^1.2.8",
+    "react-aria-offcanvas": "^1.4.2",
+    "styled-components": "^4.4.1"
   }
 }

@@ -1,15 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import "../vendor/bootstrap.css"
-
+import {useQuery} from "@apollo/client"
+import { WEDDING_QUERY, GUEST_QUERY } from "../utils/queries"
 
 function GuestLanding() {
+
+// to retreive guest email from local storage
+const guestEmail = localStorage.getItem("guestEmail")
+console.log("the stored email is ", guestEmail)
+
+
+
+
+// search guest list for matching email
+const {loading, data} = useQuery(GUEST_QUERY)
+if (loading) {
+    return <p>loading</p>
+}
+
+const correctGuest = data.guests.filter((guest) =>{
+    return guest.email == guestEmail
+
+})
+
+console.log("the correct guest is ", correctGuest)
+console.log("the guest name is", correctGuest[0].name)
+
     return (
         <div>
             <div className="container content d-flex flex-row p-2 justify-content-between">
                 <div className="row">
                     <div className="col-sm-4 talk">
                         <h1>Welcome to our Wedding</h1>
-                        <h1>"name"</h1>
+                        <h1>{correctGuest[0].name}</h1>
                         <br />
                         <img src="https://via.placeholder.com/200"></img>
                         <h6 className="bold-four">
@@ -41,7 +64,7 @@ function GuestLanding() {
 
             <div className="col-sm-6 talk">
                 <h1>Welcome to our Wedding</h1>
-                <h1>"name"</h1>
+                <h1>{correctGuest[0].name}</h1>
                 <img src="https://via.placeholder.com/300x150"></img>
                 <br />
                 <h6 className="bold-four">

@@ -73,6 +73,11 @@ const resolvers = {
 			return guest
 			
 		},
+		addWedding: async (parent, args) => {
+            const wedding = await Wedding.create(args)
+            return  wedding 
+            
+        }
 	},
 }
 

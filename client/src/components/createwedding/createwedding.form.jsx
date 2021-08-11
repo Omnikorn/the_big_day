@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Container from "@material-ui/core/Container"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
@@ -7,6 +7,10 @@ import RemoveIcon from "@material-ui/icons/Remove"
 import AddIcon from "@material-ui/icons/Add"
 import Icon from "@material-ui/core/Icon"
 import emailjs from "emailjs-com"
+import { WEDDING_QUERY } from "../../utils/queries"
+import { useMutation } from "@apollo/client"
+import { ADD_WEDDING } from "../../utils/mutations"
+import Auth from "../../utils/auth"
 
 import { makeStyles } from "@material-ui/core/styles"
 import ("./createwedding.css")
@@ -36,11 +40,43 @@ function CreateWedding() {
 			menuChoices: "",
 		},
 	])
+	const [organiserState, setOrganiserSate] = useState(null)
+	const [currentUser, setCurrentUser] = useState(null)
+	const [ currentID, setCurrentID] = useState(null)
+	useEffect(() => {
+		const { organiser } = Auth.loggedIn()
+		console.log(
+			"this is the organiser from local storage",
+			organiser
+		)
+		setCurrentUser(organiser.username)
+		setCurrentID(organiser._id)
+	}, [])
+	const [addWedding, {error}] = useMutation(ADD_WEDDING)
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log("input fields", inputFields)
+		// console.log("input fields", inputFields)
+		let i = 0
+		try{
+			const { data } = await addWedding({variables:{
+				bride_first_name:inputFields[i].bride_first_name,
+				bride_last_name:inputFields[i].bride_last_name,
+				groom_first_name:inputFields[i].groom_first_name,
+				groom_last_name:inputFields[i].groom_last_name,
+				venue:inputFields[i].venue,
+				date:inputFields[i].date,
+				menu_choice:inputFields[i].menu_choice,
+				wedding_owner:currentUser
+			
+		}})
+		console.log(data)
+
+	} catch(err){
+		console.log (err)}
 	}
+
+	
 
 	const handleChangeInput = (index, event) => {
 		console.log(index, event.target.name)
@@ -79,17 +115,17 @@ function CreateWedding() {
 					<div key={index}>
 						<div>
 							<TextField
-								name="brideFirstName"
+								name="bride_first_name"
 								label="Bride's First Name"
-								value={inputField.brideFirstName}
+								value={inputField.bride_first_name}
 								onChange={(event) =>
 									handleChangeInput(index, event)
 								}
 							/>
 							<TextField
-								name="brideLastName"
+								name="bride_last_name"
 								label="Bride's Last Name"
-								value={inputField.brideLastName}
+								value={inputField.bride_last_name}
 								onChange={(event) =>
 									handleChangeInput(index, event)
 								}
@@ -97,17 +133,17 @@ function CreateWedding() {
 						</div>
 						<div>
 							<TextField
-								name="groomFirstName"
+								name="groom_first_name"
 								label="Groom's First Name"
-								value={inputField.groomFirstName}
+								value={inputField.groom_first_name}
 								onChange={(event) =>
 									handleChangeInput(index, event)
 								}
 							/>
 							<TextField
-								name="groomLastName"
+								name="groon_last_name"
 								label="Groom's Last Name"
-								value={inputField.groomLastName}
+								value={inputField.groon_last_name}
 								onChange={(event) =>
 									handleChangeInput(index, event)
 								}
@@ -125,9 +161,9 @@ function CreateWedding() {
 						</div>
                         <div>
 						    <TextField
-    							name="weddingDate"
+    							name="date"
     							label="Wedding Date"
-    							value={inputField.weddingDate}
+    							value={inputField.date}
     							onChange={(event) =>
     								handleChangeInput(index, event)
     							}
@@ -135,9 +171,9 @@ function CreateWedding() {
 						</div>
 
 						<TextField
-							name="menuChoices"
+							name="menu_choice"
 							label="Menu Choices"
-							value={inputField.menuChoices}
+							value={inputField.menu_choice}
 							onChange={(event) =>
 								handleChangeInput(index, event)
 							}

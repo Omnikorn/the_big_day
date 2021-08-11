@@ -61,8 +61,8 @@ import Auth from "../../utils/auth"
 console.log("the wedding data from wedding query is" , data)
 
 	const weddingData = data.weddings.filter((wedding) => {
-		const weddingID = wedding._id
-		return wedding._id 
+		const weddingID = "61110f69077f5da76492affa"
+		return wedding._id == weddingID 
 	})
 
 	console.log("the wedding data is ", data.weddings)

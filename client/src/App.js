@@ -24,6 +24,7 @@ import { setContext } from "@apollo/client/link/context"
 import { PartyProvider, usePartyContext } from "./utils/partycontext"
 import Auth from "./utils/auth"
 import NavBar from './components/NavBar'
+import GuestLanding from './components/GuestLanding'
 import { slide as Menu } from 'react-burger-menu'
 
 
@@ -88,6 +89,7 @@ function App() {
 							<Route exact path="/" component={Landing} />
 							<Route exact path="/Home" component={Home} />
 							<Route exact path="/login" component={Login} />
+							<Route exact path="/guestlanding" component={GuestLanding} />
 							<Route
 								exact
 								path="/guests"

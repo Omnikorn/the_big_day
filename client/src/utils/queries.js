@@ -10,6 +10,8 @@ export const WEDDING_QUERY = gql`
 			groom_last_name
 			date
 			venue
+			wedding_owner
+			menu_choice
 		}
 	}
 `

@@ -71,9 +71,7 @@ const [addGuests, {error}] = useMutation(ADD_GUESTS)
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-        // TODO needs logic to add all guests back to database
-        // const finalGuestList=[...inputFields,...filteredGuestList]
-		// console.log("the input field list", inputFields)
+        
 		let i
 		for(i=0; i<inputFields.length; i++){
 			console.log("i=", i, "input= ", inputFields[i])
@@ -89,21 +87,7 @@ try{
 	}})
 
 	console.log(data)
-	// console.log("Name", inputFields[i].name)
-	// console.log("Email", inputFields[i].email)
-	//  addGuests({
-	// 	variables:{
-	// 		"addGuestName": "Guest1",
-	// 		"addGuestEmail": "Guest1@gmail.com",
-	// 		"addGuestRSVP": "Guest1",
-	// 		"addGuestMenuChoice": "Guest1",
-	// 		"addWeddingOwner": "WeddingOwner"
-		//	email:inputFields[i].email,
-		//	rsvp:inputFields[i].rsvp,
-//menu:inputFields[i].menu,
-		//	wedding_owner:currentUser
-		// }
-	// })
+	
 } catch(err){
 	console.log(err)
 }

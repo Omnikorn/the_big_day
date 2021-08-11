@@ -21,8 +21,10 @@ import {
 	InMemoryCache,
 } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
-import { PartyProvider , usePartyContext } from "./utils/partycontext"
+import { PartyProvider, usePartyContext } from "./utils/partycontext"
 import Auth from "./utils/auth"
+import { slide as Menu } from 'react-burger-menu'
+
 
 
 const httpLink = createHttpLink({
@@ -52,58 +54,64 @@ const client = new ApolloClient({
 
 function App() {
 	const partycontext = usePartyContext()
-	console.log("party context=" , partycontext)
+	console.log("party context=", partycontext)
 	const [user, setUser] = useState();
-	useEffect (()=>{
-		const {organiser} = Auth.loggedIn()
-		console.log("this is the organiser from local storage" , organiser)
-			},[]) 
-  // If isLoggedIn is true, set the UserContext with user data
-  // Otherwise, set it to {user: null}
-  useEffect(() => {
-    setUser({ loading: true });
-    magic.user.isLoggedIn().then((isLoggedIn) => {
-      return isLoggedIn
-        ? magic.user.getMetadata().then((userData) => setUser(userData))
-        : setUser({ user: null });
-    });
-  }, []);
+	const [openMenu, setOpenMenu] = useState(false) 
+
+	useEffect(() => {
+		const { organiser } = Auth.loggedIn()
+		console.log("this is the organiser from local storage", organiser)
+	}, [])
+	// If isLoggedIn is true, set the UserContext with user data
+	// Otherwise, set it to {user: null}
+	useEffect(() => {
+		setUser({ loading: true });
+		magic.user.isLoggedIn().then((isLoggedIn) => {
+			return isLoggedIn
+				? magic.user.getMetadata().then((userData) => setUser(userData))
+				: setUser({ user: null });
+		});
+	}, []);
+
 	return (
 		<ApolloProvider client={client}>
 			<PartyProvider>
-			<Router>
-			
-			<UserContext.Provider value={[user, setUser]}>
-			<Header />
-				<div className="App">
-					<Route exact path="/" component={Landing} />
-					<Route exact path="/Home" component={Home} />
-					<Route exact path="/login" component={Login} />
-					<Route
-						exact
-						path="/guests"
-						component={Guests}
-					/>
-					<Route
-						exact
-						path="/createwedding"
-						component={CreateWedding}
-					/>
-					<Route
-						exact
-						path="/viewwedding"
-						component={ViewWedding}
-					/>
-					<Route exact path ="/createuser" component={Createuser} />
-				</div>
-				</UserContext.Provider>
-				
-			</Router>
+				<Router>
+
+					<UserContext.Provider value={[user, setUser]}>
+						<Menu isOpen={openMenu}>
+							
+							<Header setOpenMenu={setOpenMenu} />
+						</Menu>
+						<div className="App">
+							<Route exact path="/" component={Landing} />
+							<Route exact path="/Home" component={Home} />
+							<Route exact path="/login" component={Login} />
+							<Route
+								exact
+								path="/guests"
+								component={Guests}
+							/>
+							<Route
+								exact
+								path="/createwedding"
+								component={CreateWedding}
+							/>
+							<Route
+								exact
+								path="/viewwedding"
+								component={ViewWedding}
+							/>
+						</div>
+					</UserContext.Provider>
+
+				</Router>
 			</PartyProvider>
-			</ApolloProvider>
-			)}
-	// only changes provider value if one of the params change (may need to remove)
-	// const value = useMemo(()=>({organiser, setOrganiser}),[organiser,setOrganiser])
+		</ApolloProvider>
+	)
+}
+// only changes provider value if one of the params change (may need to remove)
+// const value = useMemo(()=>({organiser, setOrganiser}),[organiser,setOrganiser])
 
 
 

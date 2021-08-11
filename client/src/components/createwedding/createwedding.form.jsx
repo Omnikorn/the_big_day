@@ -54,7 +54,7 @@ function CreateWedding() {
 	}, [])
 	const [addWedding, {error}] = useMutation(ADD_WEDDING)
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
 		// console.log("input fields", inputFields)
 		let i = 0
@@ -141,7 +141,7 @@ function CreateWedding() {
 								}
 							/>
 							<TextField
-								name="groon_last_name"
+								name="groom_last_name"
 								label="Groom's Last Name"
 								value={inputField.groon_last_name}
 								onChange={(event) =>

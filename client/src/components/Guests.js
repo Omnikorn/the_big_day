@@ -8,7 +8,7 @@ import AddIcon from "@material-ui/icons/Add"
 import Icon from "@material-ui/core/Icon"
 import emailjs from "emailjs-com"
 import Auth from "../utils/auth"
-import { ORG_QUERY, GUEST_QUERY } from "../utils/queries"
+import { WEDDING_QUERY, GUEST_QUERY } from "../utils/queries"
 import { ADD_GUESTS } from "../utils/mutations"
 import { makeStyles } from "@material-ui/core/styles"
 import { useQuery, useMutation } from "@apollo/client"
@@ -54,30 +54,62 @@ function Guests() {
 
 const [addGuests, {error}] = useMutation(ADD_GUESTS)
 
-	const handleSubmit = (e) => {
+// this is the section to fetch wedding data to populate in emails
+
+
+//  const {thinking, data} = useQuery(WEDDING_QUERY)
+//  console.log ("the data from the BANANA is ", data)
+// //  const weddingData = banana.weddings.filter((wedding) => {
+// // 	const weddingID = "61110f69077f5da76492affa"
+// // 	return wedding._id == weddingID 
+// // })
+// // console.log("this is the filtered wedding",weddingData)
+
+
+
+
+
+	const handleSubmit = async (e) => {
 		e.preventDefault()
         // TODO needs logic to add all guests back to database
         // const finalGuestList=[...inputFields,...filteredGuestList]
-		console.log("the input field list", inputFields)
+		// console.log("the input field list", inputFields)
 		let i
 		for(i=0; i<inputFields.length; i++){
 			console.log("i=", i, "input= ", inputFields[i])
-// try{
-// 	const {data} = addGuests({
-// 		variables:{
-// 			name:inputFields[i].name,
-// 			email:inputFields[i].email,
-// 			rsvp:inputFields[i].rsvp,
-// 			menu:inputFields[i].menu,
-// 			wedding_owner:currentUser
-// 		}
-// 	})
-// } catch(err){
-// 	console.log(err)
-// }
-		}
+try{
+	
+
+	const {data} = await addGuests({variables:{
+		name:inputFields[i].name,
+		email:inputFields[i].email,
+		rsvp:inputFields[i].rsvp,
+		menu:inputFields[i].menu,
+		wedding_owner:currentUser,
+	}})
+
+	console.log(data)
+	// console.log("Name", inputFields[i].name)
+	// console.log("Email", inputFields[i].email)
+	//  addGuests({
+	// 	variables:{
+	// 		"addGuestName": "Guest1",
+	// 		"addGuestEmail": "Guest1@gmail.com",
+	// 		"addGuestRSVP": "Guest1",
+	// 		"addGuestMenuChoice": "Guest1",
+	// 		"addWeddingOwner": "WeddingOwner"
+		//	email:inputFields[i].email,
+		//	rsvp:inputFields[i].rsvp,
+//menu:inputFields[i].menu,
+		//	wedding_owner:currentUser
+		// }
+	// })
+} catch(err){
+	console.log(err)
+}
+		}}
 		
-	}
+	
 
 	const handleChangeInput = (index, event) => {
 		console.log(index, event.target.name)

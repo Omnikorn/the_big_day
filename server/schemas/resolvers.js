@@ -64,17 +64,12 @@ guests: async (parent, args)=>{
         },
 
 
-        addGuests: async (parent, args) =>{
-            try {
-                for (i=0; i<args.finalGuestList.length; i++  ){
-                await Guests.create(finalGuestList) 
-            }}
-            catch(err) {
-                console.log(err)
-            }
-        }
-    }
+        addGuests: async (parent, {input}) =>{
+           return Guests.create(input)
+         
+    },
 
-};
+}
+} 
 
 module.exports = resolvers;

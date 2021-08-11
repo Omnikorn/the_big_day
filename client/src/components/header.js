@@ -48,7 +48,6 @@ const Header = ({setOpenMenu}) => {
 
   return (
     <nav>
-
       <ul>
         <li>
           <Link to="/">

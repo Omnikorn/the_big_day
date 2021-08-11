@@ -80,6 +80,7 @@ function App() {
 
 					<UserContext.Provider value={[user, setUser]}>
 						<Menu isOpen={openMenu}>
+							
 							<Header setOpenMenu={setOpenMenu} />
 						</Menu>
 						<div className="App">

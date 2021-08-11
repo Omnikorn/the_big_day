@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from "react"
 
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 import { useHistory } from "react-router-dom";
@@ -8,13 +9,15 @@ import { magic } from "../lib/magic";
 import { CallToAction, button } from "@magiclabs/ui";
 import { UserContext } from "../lib/UserContext"
 import Auth from "../utils/auth";
-
+import { slide as Menu } from 'react-burger-menu'
 import './burger.css'
 
 
-const Header = ({setOpenMenu}) => {
+
+const Header = () => {
   const history = useHistory();
   const [user, setUser] = useContext(UserContext);
+  
 
   const Logout = () => {
     magic.user.logout().then(() => {
@@ -44,14 +47,16 @@ const Header = ({setOpenMenu}) => {
 
     }
   };
-
+ 
+    
+  
 
   return (
-    <nav>
+    <Menu burgerButtonClassName={ "my-class" }>
       <ul>
         <li>
-          <Link to="/">
-            <button className="menu-item" onPress={() => history.push('/myguests')} onClick = {() => setOpenMenu(false)} >
+          <Link to="/" >
+            <button className="menu-item" onPress={() => history.push('/myguests')} >
               Home
             </button>
           </Link>
@@ -63,7 +68,7 @@ const Header = ({setOpenMenu}) => {
           </Link> */}
         <li>
           < Link to="/viewwedding">
-            <button className="menu-item" variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myweddings')}>
+            <button className="menu-item" variant="contained" color="inherit" textAlign="right" onPress={() => history.push('/myweddings')} >
               My Weddings
             </button>
           </Link>
@@ -119,7 +124,7 @@ const Header = ({setOpenMenu}) => {
 
       </ul>
 
-    </nav>
+    </Menu>
 
   )
 }

@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./NavBar.css";
 import { useHistory } from "react-router-dom";
 import { magic } from "../lib/magic";
-import { CallToAction, button } from "@magiclabs/ui";
+import { CallToAction, button, TextButton } from "@magiclabs/ui";
 import { UserContext } from "../lib/UserContext"
 import Auth from "../utils/auth";
 import { useContext } from "react";
@@ -44,9 +44,10 @@ const NavBar = () => {
       magic.user.logout().then(() => {
         setUser({ user: null });
         localStorage.removeItem("guestEmail")
-        history.push("/");
+        history.push("/login");
   
       })
+      
   
     };
   
@@ -127,27 +128,6 @@ const NavBar = () => {
                 Guests
               </Link>
             </li>
-            <li>
-            {user?.loading ? (
-          <div style={{ height: '58px' }}></div>
-        ) : user?.issuer ? (
-          <>
-
-
-            <li>
-              <Link color='warning' size='sm' onPress={Logout}>
-                Guest Logout
-              </Link>
-            </li>
-          </>
-        ) : (
-          <li>
-            <Link to="/login" color='primary' size='sm' onPress={() => history.push('/login')}>
-              Guest Login
-            </Link>
-          </li>
-        )}
-            </li>
             
             {user?.loading ? (
           <div style={{ height: '58px' }}></div>
@@ -156,18 +136,42 @@ const NavBar = () => {
 
 
             <li>
-              <Link to="/login" color='warning' size='sm' onPress={Logout}>
+            <TextButton to="/home" color='warning' size='sm' onPress={Logout}>
                 Couple Logout
-              </Link>
+              </TextButton>
+            
             </li>
           </>
         ) : (
           <li>
-            <Link to="/home" color='primary' size='sm' onPress={() => history.push('/login')}>
+              
+              <Link to="/home" color='primary' size='sm' onPress={() => history.push('/home')}>
               Couple Login
             </Link>
           </li>
         )}
+        {user?.loading ? (
+          <div style={{ height: '58px' }}></div>
+        ) : user?.issuer ? (
+          <>
+
+
+            <li>
+            <TextButton to="/login" color='warning' size='sm' onPress={Logout}>
+                Guest Logout
+                </TextButton>
+            
+            </li>
+          </>
+        ) : (
+          <li>
+                
+                <Link to="/login" color='primary' size='sm' onPress={() => history.push('/login')}>
+              Guest Login
+            </Link>
+          </li>
+        )}
+        
 
     
           </ul>

@@ -26,7 +26,7 @@ import Auth from "./utils/auth"
 import NavBar from './components/NavBar'
 import GuestLanding from './components/GuestLanding'
 import { slide as Menu } from 'react-burger-menu'
-
+import createuser from './components/createuser'
 
 
 const httpLink = createHttpLink({
@@ -104,6 +104,11 @@ function App() {
 								exact
 								path="/viewwedding"
 								component={ViewWedding}
+							/>
+							<Route
+								exact
+								path="/createuser"
+								component={createuser}
 							/>
 						</div>
 					</UserContext.Provider>

@@ -12,7 +12,7 @@ const insideStyles = {
 	position: "absolute",
 	fontFamily: "ballada",
 	color: "palevioletred",
-	fontSize: "10rem",
+	fontSize: "5rem",
     width:"100vw",
 	top: "50%",
 	left: "50%",
@@ -25,7 +25,7 @@ const paragraphStyle = {
 	color: "white",
 	backgroundColor: "palevioletred",
     borderRadius:"25px",
-	fontSize: "1.3rem",
+	fontSize: "1rem",
 	top: "90%",
 	left: "50%",
 	transform: "translate(-50%,-70%)",
@@ -112,9 +112,10 @@ const image5 = require("./newimages/flowers.png").default
                     <Parallax
                         bgImage={image4}
                         strength={200}
+                        
                         renderLayer={(percentage) => (
                             <div>
-                                
+                               
                                     <div
                                         style={{
                                             position: "absolute",
@@ -134,7 +135,7 @@ const image5 = require("./newimages/flowers.png").default
                         )}
                     >
                         <div style={{ height: 1000 }}>
-                            <div style={insideStyles}>Sign up now</div>
+                            <div style={insideStyles}> <a href="/createuser">Sign up now</a></div>
                         </div>
                     </Parallax>
                     {/* <h2>| | |</h2> */}

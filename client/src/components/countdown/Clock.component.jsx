@@ -33,10 +33,10 @@ const Clock = ({ deadline }) => {
 
   return (
     <div>
-      <div className="Clock-days">{leading0(days)} Days</div>
-      <div className="Clock-hours">{leading0(hours)} Hours</div>
-      <div className="Clock-minutes">{leading0(minutes)} Minutes</div>
-      <div className="Clock-seconds">{leading0(seconds)} Seconds</div>
+      <h5 className="Clock-days">{leading0(days)} Days</h5>
+      <h5 className="Clock-hours">{leading0(hours)} Hours</h5>
+      <h5 className="Clock-minutes">{leading0(minutes)} Minutes</h5>
+      <h5 className="Clock-seconds">{leading0(seconds)} Seconds</h5>
     </div>
   );
 };

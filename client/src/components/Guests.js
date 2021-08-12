@@ -8,7 +8,10 @@ import AddIcon from "@material-ui/icons/Add"
 import Icon from "@material-ui/core/Icon"
 import emailjs from "emailjs-com"
 import Auth from "../utils/auth"
-import { WEDDING_QUERY, GUEST_QUERY } from "../utils/queries"
+import {
+	WEDDING_QUERY,
+	GUEST_QUERY,
+} from "../utils/queries"
 import { ADD_GUESTS } from "../utils/mutations"
 import { makeStyles } from "@material-ui/core/styles"
 import { useQuery, useMutation } from "@apollo/client"
@@ -39,8 +42,10 @@ function Guests() {
 	const [organiserState, setOrganiserState] = useState(null)
 	const [currentUser, setCurrentUser] = useState(null)
 	const [currentID, setCurrentID] = useState(null)
-
-
+	const [brideFirstName, setBrideFirstName ] =useState(null)
+	const [groomFirstName, setGroomFirstName]=useState(null)
+	const [weddingWhen, setWeddingWhen]=useState(null)
+	const [weddingVenue, setWeddingVenue] = useState(null)
 
 	useEffect(() => {
 		const { organiser } = Auth.loggedIn()
@@ -52,48 +57,52 @@ function Guests() {
 		setCurrentID(organiser._id)
 	}, [])
 
-const [addGuests, {error}] = useMutation(ADD_GUESTS)
+	const [addGuests, { error }] = useMutation(ADD_GUESTS)
 
-// this is the section to fetch wedding data to populate in emails
+	// this is the section to fetch wedding data to populate in emails
+
+// 	const weddingResults = useQuery(WEDDING_QUERY)
+// 	console.log(
+// 		"the data from the BANANA is ",
+// 		weddingResults.data
+// 	)
+// 	 const weddingData = weddingResults.data.weddings.filter((wedding) => {
+// 	// // 	const weddingID = "61110f69077f5da76492affa"
+// 		return wedding.wedding_owner == currentUser
+// 	})
+// 	console.log("this is the filtered wedding", weddingData)
+// setBrideFirstName(weddingData[0].bride_first_name)
+// console.log("the bride is ..... ::",brideFirstName)
 
 
-//  const {thinking, data} = useQuery(WEDDING_QUERY)
-//  console.log ("the data from the BANANA is ", data)
-// //  const weddingData = banana.weddings.filter((wedding) => {
-// // 	const weddingID = "61110f69077f5da76492affa"
-// // 	return wedding._id == weddingID 
-// // })
-// // console.log("this is the filtered wedding",weddingData)
 
 
 
 
-
+	// handle the submit form
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-        
+
 		let i
-		for(i=0; i<inputFields.length; i++){
+		for (i = 0; i < inputFields.length; i++) {
 			console.log("i=", i, "input= ", inputFields[i])
-try{
-	
+			try {
+				const { data } = await addGuests({
+					variables: {
+						name: inputFields[i].name,
+						email: inputFields[i].email,
+						rsvp: inputFields[i].rsvp,
+						menu: inputFields[i].menu,
+						wedding_owner: currentUser,
+					},
+				})
 
-	const {data} = await addGuests({variables:{
-		name:inputFields[i].name,
-		email:inputFields[i].email,
-		rsvp:inputFields[i].rsvp,
-		menu:inputFields[i].menu,
-		wedding_owner:currentUser,
-	}})
-
-	console.log(data)
-	
-} catch(err){
-	console.log(err)
-}
-		}}
-		
-	
+				console.log(data)
+			} catch (err) {
+				console.log(err)
+			}
+		}
+	}
 
 	const handleChangeInput = (index, event) => {
 		console.log(index, event.target.name)
@@ -125,12 +134,10 @@ try{
 		const values = [...inputFields]
 		const email = values[index].email
 		const name = values[index].name
-		
 
 		const params = {
 			name: name,
 			email: email,
-			
 		}
 
 		emailjs

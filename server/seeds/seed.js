@@ -30,7 +30,7 @@ db.once("open", async () => {
 	try {
 		await User.deleteMany({})
 		await Wedding.deleteMany({})
-		// await Guests.deleteMany({});
+		await Guests.deleteMany({});
 
 		await User.create(userData)
 

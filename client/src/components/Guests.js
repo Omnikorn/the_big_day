@@ -39,13 +39,13 @@ function Guests() {
 		{ name: "", email: "", rsvp: "", menu: "" },
 	])
 
-	const [organiserState, setOrganiserState] = useState(null)
+	const searchWedding = useQuery(WEDDING_QUERY)
+	console.log ("all the weddings are ...", searchWedding.data.weddings)
+
+	
 	const [currentUser, setCurrentUser] = useState(null)
 	const [currentID, setCurrentID] = useState(null)
-	const [brideFirstName, setBrideFirstName ] =useState(null)
-	const [groomFirstName, setGroomFirstName]=useState(null)
-	const [weddingWhen, setWeddingWhen]=useState(null)
-	const [weddingVenue, setWeddingVenue] = useState(null)
+	
 
 	useEffect(() => {
 		const { organiser } = Auth.loggedIn()
@@ -59,21 +59,7 @@ function Guests() {
 
 	const [addGuests, { error }] = useMutation(ADD_GUESTS)
 
-	// this is the section to fetch wedding data to populate in emails
-
-// 	const weddingResults = useQuery(WEDDING_QUERY)
-// 	console.log(
-// 		"the data from the BANANA is ",
-// 		weddingResults.data
-// 	)
-// 	 const weddingData = weddingResults.data.weddings.filter((wedding) => {
-// 	// // 	const weddingID = "61110f69077f5da76492affa"
-// 		return wedding.wedding_owner == currentUser
-// 	})
-// 	console.log("this is the filtered wedding", weddingData)
-// setBrideFirstName(weddingData[0].bride_first_name)
-// console.log("the bride is ..... ::",brideFirstName)
-
+	
 
 
 
@@ -129,15 +115,33 @@ function Guests() {
 		setInputField(values)
 	}
 
+
+
+
+
+
 	function sendEmail(index) {
 		// function to send email to each guest based on their index in the table
 		const values = [...inputFields]
 		const email = values[index].email
 		const name = values[index].name
 
+			const correctWedding = searchWedding.data.weddings.filter((wedding)=>{
+		return wedding.wedding_owner==currentUser
+	})
+console.log ( "the filtered wedding results are" , correctWedding)
+	const groom = correctWedding[0].groom_first_name
+	const bride = correctWedding[0].bride_first_name
+	const weddingdate = correctWedding[0].date
+	const location = correctWedding[0].venue
+
 		const params = {
 			name: name,
 			email: email,
+			groom: groom,
+			bride: bride,
+			date: weddingdate,
+			venue:location
 		}
 
 		emailjs
@@ -166,6 +170,11 @@ function Guests() {
 		"the filtered guest list is",
 		filteredGuestList
 	)
+
+
+
+
+
 
 	return (
 		<Container>

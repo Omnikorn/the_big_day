@@ -2,7 +2,7 @@
     height: 100%;
     font-size: 1em;
     text-decoration: underline;
-    background-color: white;
+    background-image: linear-gradient(to bottom, white, pink);
   }
   
   .nav-wrapper {
@@ -21,8 +21,9 @@
   }
   
   .logo img {
-    width: 100%;
+    width: 50%;
     margin-left: -18px;
+    margin-bottom: 0 auto;
   }
   
   .list-wrapper {
@@ -48,7 +49,8 @@
     list-style: none;
     margin-bottom: 15px;
   }
-  
+
+ 
   .list-wrapper ul li a {
     display: block;
     font-size: 24px;
@@ -92,7 +94,7 @@
       padding: 0;
       width: 100%;
       height: 100%;
-      text-align: left;
+      text-align: center;
       position: relative;
       background-color: transparent;
     }
@@ -118,3 +120,5 @@
       background: transparent;
     }
   }
+
+

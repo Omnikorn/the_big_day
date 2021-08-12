@@ -8,6 +8,7 @@ import { UserContext } from "../lib/UserContext"
 import Auth from "../utils/auth";
 import { useContext } from "react";
 import "../components/NavBar.css"
+import rose from "../rose.png"
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
@@ -76,8 +77,8 @@ const NavBar = () => {
         
       <div className="logo">
           <Link to="/">
-            <img
-              src="https://i.pinimg.com/564x/5e/83/7d/5e837dfdd6293fbe9c5cf89c28e9b800.jpg"
+            <img className="rose"
+              src={rose}
               alt="brand"
             />
           </Link>
@@ -114,7 +115,7 @@ const NavBar = () => {
               <Link
                 to="/viewwedding"
                 onClick={handleClose}
-                style={{ color: location.pathname === "/about" && "#4071f4" }}
+                style={{ color: location.pathname === "/viewwedding" && "#4071f4" }}
               >
                 View Wedding
               </Link>
@@ -123,7 +124,7 @@ const NavBar = () => {
               <Link
                 to="/Guests"
                 onClick={handleClose}
-                style={{ color: location.pathname === "/skills" && "#4071f4" }}
+                style={{ color: location.pathname === "/Guests" && "#4071f4" }}
               >
                 Guests
               </Link>
@@ -171,7 +172,24 @@ const NavBar = () => {
             </Link>
           </li>
         )}
-        
+        <li>
+        <Link
+                to="/createwedding"
+                onClick={handleClose}
+                style={{ color: location.pathname === "/createwedding" && "#4071f4" }}
+              >
+               Create Wedding
+              </Link>
+              </li>
+              <li>
+        <Link
+                to="/createuser"
+                onClick={handleClose}
+                style={{ color: location.pathname === "/createuser" && "#4071f4" }}
+              >
+               Signup
+              </Link>
+              </li>
 
     
           </ul>

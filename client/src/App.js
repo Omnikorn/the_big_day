@@ -58,7 +58,7 @@ function App() {
 	const partycontext = usePartyContext()
 	console.log("party context=", partycontext)
 	const [user, setUser] = useState();
-	const [openMenu, setOpenMenu] = useState(false) 
+	const [openMenu, setOpenMenu] = useState(false)
 
 	useEffect(() => {
 		const { organiser } = Auth.loggedIn()
@@ -81,12 +81,18 @@ function App() {
 				<Router>
 
 					<UserContext.Provider value={[user, setUser]}>
-						
-							
-							<NavBar />
-						
+
+
+
+
 						<div className="App">
-							<Route exact path="/" component={Landing} />
+							<div>
+								<NavBar />
+								<Route exact path="/" component={Landing} />
+							</div>
+
+
+
 							<Route exact path="/Home" component={Home} />
 							<Route exact path="/login" component={Login} />
 							<Route exact path="/guestlanding" component={GuestLanding} />

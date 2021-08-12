@@ -70,6 +70,7 @@ function CreateWedding() {
 				wedding_owner:currentUser
 			
 		}})
+		window.location.assign("/viewwedding")
 		console.log(data)
 
 	} catch(err){

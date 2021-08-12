@@ -75,6 +75,8 @@ const typeDefs = gql`
 			email: String!
 			password: String!
 		): Auth
+		update_rsvp(rsvp:String, email:String) : Guest
+		update_menu(menu:String, email:String) :Guest
 
 		# removeUSer(userId: ID!): User
 		# TODO we can add remove user later not needed for minimum product ?

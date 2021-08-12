@@ -32,14 +32,6 @@ export const ADD_USER = gql`
 	}
 `
 
-// export const ADD_GUESTS = gql`
-// mutation addGuests($input: Name ){
-// 						addGuests(
-// 							guestData:$input
-// 						)
-// 					}
-
-// `
 export const ADD_GUESTS = gql`
 	mutation addGuests(
 		$name: String!
@@ -80,13 +72,27 @@ mutation addWedding (
 
 `
 
-// export const ADD_GUESTS =gql`
-// mutation Mutation($input:guestData){
-// 	addGuests(guestData:$input){
-// 		guest{
-// 			_id
-// 		}
-// 	}
 
-// }
-// `
+export const UPDATE_RSVP = gql`
+mutation update_rsvp (
+	$rsvp:String, $email:String
+){
+	update_rsvp(rsvp: $rsvp, email:$email)
+	{
+		name
+	}
+}
+`
+
+export const UPDATE_MENU= gql`
+mutation update_menu(
+	$menu:String, $email:String)
+	{
+		update_menu(menu:$menu, email:$email)
+		{
+			name
+		}
+	}
+
+
+`

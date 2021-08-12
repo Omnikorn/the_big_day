@@ -3,6 +3,7 @@ const {
 	AuthenticationError,
 } = require("apollo-server-express")
 const { signToken } = require("../utils/auth")
+const { findOne } = require("../models/User")
 
 // TODO authentication error requires apollo-server-express
 
@@ -77,7 +78,19 @@ const resolvers = {
             const wedding = await Wedding.create(args)
             return  wedding 
             
-        }
+        },
+
+		update_rsvp: async (parent, {email, rsvp})=>{
+			const updateGuest= Guests.findOneAndUpdate({email:email},{rsvp:rsvp});
+			
+			
+			return updateGuest
+		},
+
+		update_menu: async (parent, {email,menu})=>{
+			const hungryGuest= Guests.findOneAndUpdate({email:email},{menu:menu});
+			return hungryGuest
+		}
 	},
 }
 

@@ -12,6 +12,7 @@ import { magic } from "../../lib/magic"
 import { UserContext } from "../../lib/UserContext"
 import Auth from "../../utils/auth"
 import CountDown from "../countdown/Count.component"
+import "./viewweddingstyle.css"
 
 
 // import Loading from './loading';
@@ -89,20 +90,20 @@ const Callback = (props) => {
 	console.log("the wedding data is ", data.weddings)
 	console.log("the filtered wedding data is ", weddingData)
 	return (
-		<div>
+		<div className="bigcontainer">
 			<h1> Welcome to your wedding</h1>
 
 			<div>
 				{weddingData.map((wedding) => (
 					<div>
 						<div>
-							<h2 className="impnames">{wedding.bride_first_name}</h2> and <h2>{wedding.groom_first_name}</h2>
+							<h2 className="heading" style={{marginBottom: "5vh"}}>{wedding.bride_first_name} & {wedding.groom_first_name}</h2>
 						</div>
 						<p>you are getting married on</p>
-						<h3>{wedding.date}</h3>
+						<h3 style={{marginBottom: "5vh"}}>{wedding.date}</h3>
 						<p>that's in</p>
-						<h3>COUNT DOWN HERE</h3>
-						<CountDown deadline={wedding.date} />
+						
+						<CountDown style={{marginBottom: "5vh"}} deadline={wedding.date} />
 						<p> You have invited your friends and family to join you at </p>
 						<h3>{wedding.venue}</h3>
 						<p> and you have offered them a menu choice of</p>

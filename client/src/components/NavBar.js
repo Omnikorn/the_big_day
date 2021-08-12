@@ -9,14 +9,12 @@ import Auth from "../utils/auth";
 import { useContext } from "react";
 import "../components/NavBar.css"
 import rose from "../rose.png"
-
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
   const location = useLocation();
   const history = useHistory();
     const [user, setUser] = useContext(UserContext);
-
   const trackScreenWidth = () => {
     const width = window.innerWidth;
     setScreenWidth(width);
@@ -24,34 +22,23 @@ const NavBar = () => {
       setOpen(true);
     }
   };
-
   const handleClose = () => {
     if (screenWidth < 600) {
       setOpen(false);
     }
   };
-
   useEffect(() => {
     trackScreenWidth();
     window.addEventListener("resize", trackScreenWidth);
     return () => window.removeEventListener("resize", trackScreenWidth);
   }, []);
-
-  
-    
-    
-  
     const Logout = () => {
       magic.user.logout().then(() => {
         setUser({ user: null });
         localStorage.removeItem("guestEmail")
         history.push("/login");
-  
       })
-      
-  
     };
-  
     const authenticateWithServer = async didToken => {
       const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/login`, {
         method: 'POST',
@@ -60,7 +47,6 @@ const NavBar = () => {
           Authorization: 'Bearer ' + didToken,
         },
       });
-  
       if (res.status === 200) {
         // Set the UserContext to the now logged in user
         const { email } = await magic.user.getMetadata();
@@ -70,11 +56,9 @@ const NavBar = () => {
   
       }
     };
-
   return (
     <nav className="navbar">
       <div className="nav-wrapper">
-        
       <div className="logo">
           <Link to="/">
             <img className="rose"
@@ -100,7 +84,6 @@ const NavBar = () => {
               setOpen(!open);
             }}
           />
-
           <ul style={{ left: open ? "0" : "-100vw" }} className="navi">
             <li>
               <Link
@@ -129,23 +112,18 @@ const NavBar = () => {
                 Guests
               </Link>
             </li>
-            
             {user?.loading ? (
           <div style={{ height: '58px' }}></div>
         ) : user?.issuer ? (
           <>
-
-
             <li>
             <TextButton to="/home" color='warning' size='sm' onPress={Logout}>
                 Couple Logout
               </TextButton>
-            
             </li>
           </>
         ) : (
           <li>
-              
               <Link to="/home" color='primary' size='sm' onPress={() => history.push('/home')}>
               Couple Login
             </Link>
@@ -155,18 +133,14 @@ const NavBar = () => {
           <div style={{ height: '58px' }}></div>
         ) : user?.issuer ? (
           <>
-
-
             <li>
             <TextButton to="/login" color='warning' size='sm' onPress={Logout}>
                 Guest Logout
                 </TextButton>
-            
             </li>
           </>
         ) : (
           <li>
-                
                 <Link to="/login" color='primary' size='sm' onPress={() => history.push('/login')}>
               Guest Login
             </Link>
@@ -190,13 +164,10 @@ const NavBar = () => {
                Signup
               </Link>
               </li>
-
-    
           </ul>
         </div>
       </div>
     </nav>
   );
 };
-
 export default NavBar;

@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	image: {
 		backgroundImage:
-			"url(https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)",
+			`url("./jeremy-wong-weddings-K8KiCHh4WU4-unsplash.jpg")`,
 		backgroundRepeat: "no-repeat",
 		backgroundColor:
 			theme.palette.type === "light"
@@ -83,7 +83,7 @@ export default function SignIn() {
             const {data} = await addUser({
                 variables:{...userFormData}
             })
-            window.location.assign("/")
+            window.location.assign("/home")
         } catch (error){
             console.log(error)
         }

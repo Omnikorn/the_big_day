@@ -18,13 +18,14 @@ import { LOGIN_USER } from "../utils/mutations"
 import Auth from "../utils/auth"
 import { usePartyContext } from "../utils/partycontext"
 
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: "100vh",
 	},
 	image: {
-		backgroundImage:
-			"url(https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)",
+		
+		
 		backgroundRepeat: "no-repeat",
 		backgroundColor:
 			theme.palette.type === "light"

@@ -9,6 +9,7 @@ import Auth from "../utils/auth";
 import { useContext } from "react";
 import "../components/NavBar.css"
 import rose from "../rose.png"
+import { MagicIncomingWindowMessage } from "magic-sdk";
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
@@ -56,6 +57,9 @@ const NavBar = () => {
   
       }
     };
+    const coupleLogout = () => {
+      Auth.logout()
+    }
   return (
     <nav className="navbar">
       <div className="nav-wrapper">
@@ -100,7 +104,14 @@ const NavBar = () => {
                 onClick={handleClose}
                 style={{ color: location.pathname === "/viewwedding" && "#4071f4" }}
               >
-                View Wedding
+                Wedding
+              </Link>
+              <Link
+                to="/guestlanding"
+                onClick={handleClose}
+                style={{ color: location.pathname === "/guestlanding" && "#4071f4" }}
+              >
+Guest
               </Link>
             </li>
             <li>
@@ -112,23 +123,20 @@ const NavBar = () => {
                 Guests
               </Link>
             </li>
-            {user?.loading ? (
-          <div style={{ height: '58px' }}></div>
-        ) : user?.issuer ? (
-          <>
+            
             <li>
-            <TextButton to="/home" color='warning' size='sm' onPress={Logout}>
+            <TextButton to="/home" color='warning' size='sm' onClick={coupleLogout}>
                 Couple Logout
               </TextButton>
             </li>
-          </>
-        ) : (
+        
+        
           <li>
               <Link to="/home" color='primary' size='sm' onPress={() => history.push('/home')}>
               Couple Login
             </Link>
           </li>
-        )}
+        
         {user?.loading ? (
           <div style={{ height: '58px' }}></div>
         ) : user?.issuer ? (

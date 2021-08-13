@@ -1,5 +1,6 @@
 {
   "name": "big-day-local",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001",
@@ -32,12 +33,10 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "build": "cd client && npm run build",
-        "install-client": "cd client && npm install",
-        "heroku-postbuild": "npm run install-client && npm run build",
-        "server": "nodemon server.js",
-        "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
-        "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

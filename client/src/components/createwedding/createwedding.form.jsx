@@ -144,7 +144,7 @@ function CreateWedding() {
 							<TextField
 								name="groom_last_name"
 								label="Groom's Last Name"
-								value={inputField.groon_last_name}
+								value={inputField.groom_last_name}
 								onChange={(event) =>
 									handleChangeInput(index, event)
 								}

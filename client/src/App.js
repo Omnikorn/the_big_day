@@ -1,7 +1,7 @@
 import React, { useState, useContext, useMemo, useEffect } from "react"
 import {
 	BrowserRouter as Router,
-	Route,
+	Route,HashRouter
 } from "react-router-dom"
 import "./App.css"
 import CreateWedding from "./components/createwedding/createwedding.form"

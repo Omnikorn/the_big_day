@@ -24,10 +24,9 @@ const Login = () => {
         email,
         redirectURI: new URL('/guestlanding', window.location.origin).href,
         
-         // optional redirect back to your app after magic link is clicked
+         
         })
-      // console.log("email is:   ",email);
-      // f,unction store (email) {localStorage.setItem("guestEmail", email)}
+      
       
 
       // Validate didToken with server

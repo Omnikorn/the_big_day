@@ -1,8 +1,4 @@
-import React, {
-	useEffect,
-	useState,
-	useContext,
-} from "react"
+import React, { useState } from "react"
 import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -16,15 +12,13 @@ import { makeStyles } from "@material-ui/core/styles"
 import { useMutation } from "@apollo/client"
 import { ADD_USER } from "../utils/mutations"
 import Auth from "../utils/auth"
-// import { usePartyContext } from "../utils/partycontext"
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: "100vh",
 	},
 	image: {
-		backgroundImage:
-			`url("./jeremy-wong-weddings-K8KiCHh4WU4-unsplash.jpg")`,
+		backgroundImage: `url("./jeremy-wong-weddings-K8KiCHh4WU4-unsplash.jpg")`,
 		backgroundRepeat: "no-repeat",
 		backgroundColor:
 			theme.palette.type === "light"
@@ -55,45 +49,31 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
 	const classes = useStyles()
 
-	// const { organiser, setOrganiser } = usePartyContext()
-
-	// console.log("first set of organisers=" , organiser)
-
 	const [userFormData, setUserFormData] = useState({
 		username: "",
-        email: "",
+		email: "",
 		password: "",
 	})
 
-    const [addUser,{error}] = useMutation(ADD_USER)
-	// const [login, { error, data }] = useMutation(LOGIN_USER)
+	const [addUser, { error }] = useMutation(ADD_USER)
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target
 		setUserFormData({ ...userFormData, [name]: value })
-		// setOrganiser(value)
-		// console.log("data is", userFormData)
 	}
 
 	const handleFormSubmit = async (event) => {
 		event.preventDefault()
 		console.log("the form data is", userFormData)
 
-		try{
-            const {data} = await addUser({
-                variables:{...userFormData}
-            })
-            window.location.assign("/home")
-        } catch (error){
-            console.log(error)
-        }
-		
-
-		// setUserFormData({
-		// 	username: "",
-        //     email: "",
-		// 	password: "",
-		// })
+		try {
+			const { data } = await addUser({
+				variables: { ...userFormData },
+			})
+			window.location.assign("/home")
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	return (
@@ -143,9 +123,8 @@ export default function SignIn() {
 							value={userFormData.username}
 							autoFocus
 						/>
-                        
-                        
-                        <TextField
+
+						<TextField
 							variant="outlined"
 							margin="normal"
 							required

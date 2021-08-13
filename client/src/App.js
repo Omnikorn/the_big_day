@@ -27,6 +27,8 @@ import NavBar from './components/NavBar'
 import GuestLanding from './components/GuestLanding'
 import { slide as Menu } from 'react-burger-menu'
 import createuser from './components/createuser'
+import Nav2 from "./components/nav2/nav2.jsx"
+import Nav3 from "./components/nav2/nav3.jsx"
 
 
 
@@ -86,7 +88,7 @@ function App() {
 
 						<div className="App">
 							<div>
-								<NavBar />
+								<Nav3 />
 								<Route exact path="/" component={Landing} />
 							</div>
 
@@ -114,6 +116,12 @@ function App() {
 								exact
 								path="/createuser"
 								component={createuser}
+							/>
+
+<Route
+								exact
+								path="/nav2"
+								component={Nav2}
 							/>
 						</div>
 					</UserContext.Provider>

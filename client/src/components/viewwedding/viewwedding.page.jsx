@@ -3,7 +3,7 @@ import React, {
 	useEffect,
 	useState,
 } from "react"
-import { PartyContext } from "../../utils/partycontext"
+
 import { useQuery } from "@apollo/client"
 import { WEDDING_QUERY } from "../../utils/queries"
 
@@ -20,7 +20,7 @@ const Callback = (props) => {
 	const history = useHistory()
 
 	const [user, setUser] = useContext(UserContext)
-	const [organiserState, setOrganiserState] = useState(null)
+	
 	const [currentUser, setCurrentUser] = useState(null)
 	const [currentID, setCurrentID] = useState(null)
 
@@ -77,18 +77,14 @@ const Callback = (props) => {
 		return <p> loading ...</p>
 	}
 
-	console.log(
-		"the wedding data from wedding query is",
-		data
-	)
+	
 
 	const weddingData = data.weddings.filter((wedding) => {
-		// const weddingID = "61110f69077f5da76492affa"
+		
 		return wedding.wedding_owner == currentUser
 	})
 
-	console.log("the wedding data is ", data.weddings)
-	console.log("the filtered wedding data is ", weddingData)
+	
 	return (
 		<div className="bigcontainer">
 			<h1> Welcome to your wedding</h1>

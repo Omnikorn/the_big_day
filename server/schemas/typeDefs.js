@@ -9,7 +9,7 @@ const typeDefs = gql`
 		guests: Guest
 	}
 
-	# TODO is this for log in authentication instead of password?
+	
 	type Auth {
 		token: ID!
 		user: User
@@ -78,8 +78,7 @@ const typeDefs = gql`
 		update_rsvp(rsvp:String, email:String) : Guest
 		update_menu(menu:String, email:String) :Guest
 
-		# removeUSer(userId: ID!): User
-		# TODO we can add remove user later not needed for minimum product ?
+		
 	}
 `
 

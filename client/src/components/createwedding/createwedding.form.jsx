@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react"
 import Container from "@material-ui/core/Container"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
-import IconButton from "@material-ui/core/IconButton"
-import RemoveIcon from "@material-ui/icons/Remove"
-import AddIcon from "@material-ui/icons/Add"
+
+
 import Icon from "@material-ui/core/Icon"
-import emailjs from "emailjs-com"
-import { WEDDING_QUERY } from "../../utils/queries"
+
+
 import { useMutation } from "@apollo/client"
 import { ADD_WEDDING } from "../../utils/mutations"
 import Auth from "../../utils/auth"
@@ -40,15 +39,12 @@ function CreateWedding() {
 			menuChoices: "",
 		},
 	])
-	const [organiserState, setOrganiserSate] = useState(null)
+	
 	const [currentUser, setCurrentUser] = useState(null)
 	const [ currentID, setCurrentID] = useState(null)
 	useEffect(() => {
 		const { organiser } = Auth.loggedIn()
-		console.log(
-			"this is the organiser from local storage",
-			organiser
-		)
+		
 		setCurrentUser(organiser.username)
 		setCurrentID(organiser._id)
 	}, [])
@@ -56,7 +52,7 @@ function CreateWedding() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
-		// console.log("input fields", inputFields)
+	
 		let i = 0
 		try{
 			const { data } = await addWedding({variables:{
@@ -86,25 +82,7 @@ function CreateWedding() {
 		setInputField(values)
 	}
 
-	// const handleAddField = () => {
-	// 	setInputField([
-	// 		...inputFields,
-	// 		{
-	// 			firstName: "",
-	// 			lastName: "",
-	// 			email: "",
-	// 			rsvp: "",
-	// 			menue: "",
-	// 		},
-	// 	])
-	// }
-
-	// const handleRemoveField = (index) => {
-	// 	const values = [...inputFields]
-	// 	values.splice(index, 1)
-	// 	setInputField(values)
-	// }
-
+	
 	return (
 		<Container className="bigcontainer">
 			<h1 className="heading"> Fill in your wedding details</h1>
@@ -180,15 +158,7 @@ function CreateWedding() {
 							}
 						/>
 
-						{/* 
-                   <IconButton
-                   onClick={()=> handleRemoveField(index)}>
-                       <RemoveIcon />
-                   </IconButton>
-                   <IconButton
-                   onClick={() => handleAddField()}>
-                       <AddIcon />
-                   </IconButton> */}
+				
 					</div>
 				))}
 				<Button

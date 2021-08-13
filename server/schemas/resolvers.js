@@ -5,7 +5,7 @@ const {
 const { signToken } = require("../utils/auth")
 const { findOne } = require("../models/User")
 
-// TODO authentication error requires apollo-server-express
+
 
 const resolvers = {
 	Query: {
@@ -28,10 +28,7 @@ const resolvers = {
 			console.log("WeddingData :::", weddingData)
 			return weddingData
 		},
-		wedding: async (parent, args, context) => {
-			// TODO : add logic here please since we have a
-			return
-		},
+		
 		guests: async (parent, args) => {
 			const guestList = await Guests.find({})
 			console.log("guest list is", guestList)

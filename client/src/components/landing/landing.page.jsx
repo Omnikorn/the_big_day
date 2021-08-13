@@ -60,10 +60,7 @@ const image5 = require("./newimages/flowers.png").default
                     <div style={{ height: "140vh" }} />
                     <h1 style={insideStyles}>The Big Day</h1>
                 </Parallax>
-                {/* <h1>
-                    {" "}
-                    ------------------------------------------------
-                </h1> */}
+                
                 <div style={styles}>
                     <Parallax bgImage={image1} strength={500}>
                         <div style={{ height: "100vh" }}>
@@ -83,7 +80,7 @@ const image5 = require("./newimages/flowers.png").default
                             </div>
                         </div>
                     </Parallax>
-                    {/* <h2>| | |</h2> */}
+                    
                     <Parallax
                         bgImage={image2}
                         blur={{ min: -1, max: 3 }}
@@ -97,7 +94,7 @@ const image5 = require("./newimages/flowers.png").default
                             </div>
                         </div>
                     </Parallax>
-                    {/* <h2>| | |</h2> */}
+                   
                     <Parallax bgImage={image3} strength={1000}>
     
                     <div style={{ height: 500 }}>
@@ -108,7 +105,7 @@ const image5 = require("./newimages/flowers.png").default
                         </div>
                         
                     </Parallax>
-                    {/* <h2>| | |</h2> */}
+                   
                     <Parallax
                         bgImage={image4}
                         strength={200}
@@ -138,33 +135,9 @@ const image5 = require("./newimages/flowers.png").default
                             <div style={insideStyles}> <a href="/createuser">Sign up now</a></div>
                         </div>
                     </Parallax>
-                    {/* <h2>| | |</h2> */}
-                    {/* <Parallax strength={500}>
-                        <Background className="custom-bg">
-                            <div
-                                style={{
-                                    height: 2000,
-                                    width: 2000,
-                                    backgroundImage:
-                                        "url('https://i.imgur.com/8CV5WAB.png')",
-                                }}
-                            />
-                        </Background>
-                        <div>
-                            <br />
-                            custom background component
-                            <br />
-                            <br />
-                            custom background component
-                            <br />
-                            <br />
-                            custom background component
-                            <br />
-                            <br />
-                        </div>
-                    </Parallax> */}
+                   
                     <div style={{ height: 500 }} />
-                    <h2>{"\u2728"}</h2>
+                    <h2>(C) TEAM 1</h2>
                 </div>
             </div>
         )

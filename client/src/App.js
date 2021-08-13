@@ -9,7 +9,7 @@ import Guests from "./components/Guests"
 import Home from "./components/Home"
 import Createuser from "./components/createuser"
 import Login from "./components/login"
-import Header from "./components/header"
+
 import { magic } from './lib/magic';
 import { UserContext } from './lib/UserContext';
 import Landing from "./components/landing/landing.page"
@@ -36,11 +36,9 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-	// get the authentication token from local storage if it exists
+	
 	const token = localStorage.getItem("id_token")
-	// const localUser = localStorage.getItem("user")
-	// 	const organiser = JSON.parse(localUser)
-	// return the headers to the context so httpLink can read them
+	
 	return {
 		headers: {
 			...headers,
@@ -125,8 +123,7 @@ function App() {
 		</ApolloProvider>
 	)
 }
-// only changes provider value if one of the params change (may need to remove)
-// const value = useMemo(()=>({organiser, setOrganiser}),[organiser,setOrganiser])
+
 
 
 

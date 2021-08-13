@@ -1,8 +1,4 @@
-import React, {
-	useEffect,
-	useState,
-	useContext,
-} from "react"
+import React, { useState } from "react"
 import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -17,14 +13,13 @@ import { useMutation } from "@apollo/client"
 import { LOGIN_USER } from "../utils/mutations"
 import Auth from "../utils/auth"
 import { usePartyContext } from "../utils/partycontext"
-const bg_image= require("./chairs.jpg").default
+const bg_image = require("./chairs.jpg").default
 const useStyles = makeStyles((theme) => ({
 	root: {
 		height: "100vh",
 	},
 	image: {
-		backgroundImage:
-			`src(${bg_image})`,
+		backgroundImage: `src(${bg_image})`,
 		backgroundRepeat: "no-repeat",
 		backgroundColor:
 			theme.palette.type === "light"
@@ -57,7 +52,7 @@ export default function SignIn() {
 
 	const { organiser, setOrganiser } = usePartyContext()
 
-	// console.log("first set of organisers=" , organiser)
+	
 
 	const [userFormData, setUserFormData] = useState({
 		email: "",
@@ -70,18 +65,12 @@ export default function SignIn() {
 		const { name, value } = event.target
 		setUserFormData({ ...userFormData, [name]: value })
 		setOrganiser(value)
-		// console.log("data is", userFormData)
+		
 	}
 
 	const handleFormSubmit = async (event) => {
 		event.preventDefault()
-		// console.log("the form data is", userFormData)
-
-		// const form = event.currentTarget;
-		// if (form.checkValidity()===false){
-		//   event.preventDefault();
-		//   event.stopPropagation();
-		// }
+		
 		try {
 			const { data } = await login({
 				variables: { ...userFormData },
@@ -89,11 +78,7 @@ export default function SignIn() {
 			const newuser = data.login.user
 			console.log("the new user is ", newuser)
 			setOrganiser(newuser)
-			// console.log("the organiser state is ", organiser)
-			// console.log(
-			// 	"this is the data coming back from the login",
-			// 	data
-			// )
+			
 
 			Auth.login(data.login.token, newuser)
 		} catch (e) {

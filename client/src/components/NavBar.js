@@ -9,6 +9,8 @@ import Auth from "../utils/auth";
 import { useContext } from "react";
 import "../components/NavBar.css"
 import rose from "../rose.png"
+
+
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
@@ -32,6 +34,8 @@ const NavBar = () => {
     window.addEventListener("resize", trackScreenWidth);
     return () => window.removeEventListener("resize", trackScreenWidth);
   }, []);
+
+
     const Logout = () => {
       magic.user.logout().then(() => {
         setUser({ user: null });
@@ -56,6 +60,11 @@ const NavBar = () => {
   
       }
     };
+
+const couplelogout = () =>{
+  Auth.logout()
+}
+
   return (
     <nav className="navbar">
       <div className="nav-wrapper">
@@ -163,6 +172,9 @@ const NavBar = () => {
               >
                Signup
               </Link>
+              </li>
+              <li>
+                <button onClick={couplelogout}>couple logout</button>
               </li>
           </ul>
         </div>

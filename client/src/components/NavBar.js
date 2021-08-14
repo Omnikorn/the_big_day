@@ -105,7 +105,7 @@ const NavBar = () => {
             </li>
             <li>
               <Link
-                to="/Guests"
+                to="/guests"
                 onClick={handleClose}
                 style={{ color: location.pathname === "/Guests" && "#4071f4" }}
               >

@@ -14,6 +14,7 @@ const Login = () => {
   useEffect(() => {
     user && user.issuer && history.push('/login');
   }, [user, history]);
+  
 
   async function handleLoginWithEmail(email) {
     try {

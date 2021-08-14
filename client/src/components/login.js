@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { magic } from '../lib/magic';
 import { UserContext } from '../lib/UserContext';
 import EmailForm from './email-form';
-import SocialLogins from './social-logins';
+
 
 const Login = () => {
   const history = useHistory();
@@ -18,6 +18,7 @@ const Login = () => {
 
   async function handleLoginWithEmail(email) {
     try {
+
       setDisabled(true); // disable login button to prevent multiple emails from being triggered
 
       // Trigger Magic link to be sent to user

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -7,11 +7,9 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import Icon from "@material-ui/core/Icon";
 import emailjs from "emailjs-com";
-import Auth from "../utils/auth";
-import { WEDDING_QUERY, GUEST_QUERY } from "../utils/queries";
-import { ADD_GUESTS } from "../utils/mutations";
+import { useGuestsData } from "../utils/customHooks";
 import { makeStyles } from "@material-ui/core/styles";
-import { useQuery, useMutation } from "@apollo/client";
+import {useOrganiserContext} from "../utils/organiserContext";
 const service = process.env.REACT_APP_SERVICE_ID;
 const template = process.env.REACT_APP_TEMPLATE_ID;
 const user = process.env.REACT_APP_USER_ID;
@@ -27,33 +25,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Guests() {
   const classes = useStyles();
-  
+  const organiser = useOrganiserContext();
+  console.log('org', organiser)
   // States
-  
+
   const [inputFields, setInputField] = useState([
     { name: "", email: "", rsvp: "", menu: "" },
   ]);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [currentID, setCurrentID] = useState(null);
-  
-  // Lifecycle methods
-  
-  useEffect(() => {
-    const { organiser } = Auth.loggedIn();
-    setCurrentUser(organiser.username);
-    setCurrentID(organiser._id);
-  }, []);
-  
-  // Custom hooks  
-  
-  const searchWedding = useQuery(WEDDING_QUERY);
-  const guestRes = useQuery(GUEST_QUERY);
-  const filteredGuestList = guestRes.data.guests.filter((guest) => guest.wedding_owner === currentUser);
- 
-  const [addGuests, _] = useMutation(ADD_GUESTS);
-  
-  // Methods
-  
+  const { guests, weddings, addGuests, loading } = useGuestsData(organiser);
+  console.log('g',guests)
+  console.log('w', weddings)
+
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -65,10 +47,10 @@ function Guests() {
             email: inputFields[i].email,
             rsvp: inputFields[i].rsvp,
             menu: inputFields[i].menu,
-            wedding_owner: currentUser,
+            wedding_owner: organiser.username,
           },
         });
-        console.info('Added guests ::', data)
+        console.info("Added guests ::", data);
       }
     } catch (err) {
       console.error(err);
@@ -100,8 +82,8 @@ function Guests() {
     const values = [...inputFields];
     const email = values[index].email;
     const name = values[index].name;
-    const correctWedding = searchWedding.data.weddings.filter((wedding) => {
-      return wedding.wedding_owner === currentUser;
+    const correctWedding = weddings.filter((wedding) => {
+      return wedding.wedding_owner === organiser.currentUser;
     });
     const groom = correctWedding[0].groom_first_name;
     const bride = correctWedding[0].bride_first_name;
@@ -118,20 +100,22 @@ function Guests() {
     emailjs
       .send(service, template, params, user)
       .then((res) => {
-        console.info('Email sent ::', res);
+        console.info("Email sent ::", res);
         alert("email sent thank you");
       })
       .catch((err) => console.log(err));
   }
-  
-  return guestRes.loading ? <p>Loading ....</p> : (
+
+  return loading ? (
+    <p>Loading ....</p>
+  ) : (
     <Container>
       <h1> Your Guest List</h1>
       <p> my test user id is</p>
-      <p>the organiser is {currentUser} </p>
-      <p> the user id is {currentID}</p>
+      <p>the organiser is {organiser.username} </p>
+      <p> the user id is {organiser._id}</p>
       <form className={classes.root} onSubmit={handleSubmit}>
-        {filteredGuestList.map((guest, index) => (
+        {guests && guests.map((guest, index) => (
           <div key={index}>
             <TextField
               name="name"

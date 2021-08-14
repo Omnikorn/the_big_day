@@ -91,7 +91,6 @@ const NavBar = () => {
           <ul style={{ left: open ? "0" : "-100vw" }} className="navi">
             <li>
               <Link
-              className="lnk"
                 to="/"
                 onClick={handleClose}
                 style={{ color: location.pathname === "/" && "#4071f4" }}
